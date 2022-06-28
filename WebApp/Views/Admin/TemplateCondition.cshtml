@@ -1,0 +1,252 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="TemplateCondition" ng-init="init('@ViewBag.PageUrl')">
+    <section class="content" ng-init="GetTemplateConditionData()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header card-gray card-outline">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12 col-md-12">
+                                        <button type="button" class="btn btn-danger btn-sm float-right" ng-if="Ctrl.wDelete" ng-click="DeleteData(TemplateCondition)">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm float-right mr-1" ng-if="Ctrl.wEdit" ng-click="StatusData(TemplateCondition, 0)">
+                                            <i class="fas fa-times-circle"></i> Deactivate
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm float-right mr-1" ng-if="Ctrl.wEdit" ng-click="StatusData(TemplateCondition, 1)">
+                                            <i class="fas fa-check-circle"></i> Activate
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-sm float-right mr-1" data-toggle="modal" data-target="#createTemplateConditionModal" ng-if="Ctrl.wAdd" ng-click="AddData()">
+                                            <i class="fas fa-plus-circle"></i> Create
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length form-inline">
+                                            <label>
+                                                Show
+                                                <select name="example1_length" class="form-control form-control-sm" ng-model="pagingInfo.itemsPerPage" ng-change="setItemsPerPage(pagingInfo.itemsPerPage)">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select> entries
+                                            </label>
+                                            <img src="~/Content/dist/img/ajax-loader2.gif" ng-show="loading" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <form ng-submit="search()" role="form">
+                                            <div class="form-inline dataTables_filter">
+                                                <label>
+                                                    Search:
+                                                    <input type="search" class="form-control form-control-sm mr-1" placeholder="" ng-model="pagingInfo.search">
+                                                    <select class="form-control form-control-sm mr-1" id="TemplateID" name="TemplateID" ng-model="pagingInfo.value1">
+                                                        <option value="">Please select...</option>
+                                                        <option ng-repeat="tp in Template" value="{{tp.Id}}">{{tp.Name}}</option>
+                                                    </select>
+                                                    <button type="button" class="btn btn-default btn-sm  mr-1" ng-click="search()">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>                               
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="text-center" width="3%">
+                                                        <input type="checkbox" name="checkAll" id="checkAll" ng-model="selectedAll" ng-click="selectAll()" ng-disabled="!Ctrl.wDelete && !Ctrl.wEdit" />
+                                                    </th>
+                                                    <th class="text-xs text-center sorting" width="3%" ng-click="sort('Id')">Nos</th>
+                                                    <th class="text-xs sorting" ng-click="sort('TemplateName')">Template</th>
+                                                    <th class="text-xs sorting" ng-click="sort('Description')">Description</th>
+                                                    <th class="text-xs sorting" ng-click="sort('Amount')">Amount</th>
+                                                    <th class="text-xs sorting" ng-click="sort('Condition')">Condition</th>
+                                                    <th class="text-xs sorting" ng-click="sort('TemplatePath')">Template Path</th>
+                                                    <th class="text-xs text-center sorting" ng-click="sort('Published')">Status</th>
+                                                    <th class="text-xs text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="pagingInfo.totalItems == 0">
+                                                    <td class="text-xs" colspan="9"><center>No data to display</center></td>
+                                                </tr>
+                                                <tr ng-if="pagingInfo.totalItems > 0" ng-repeat="tc in TemplateCondition">
+                                                    <td class="text-center">
+                                                        <input type="checkbox" name="check" id="check{{$index + 1}}" ng-model="tc.isChecked" ng-change="checkSelected(tc.isChecked)" ng-disabled="!Ctrl.wDelete && !Ctrl.wEdit" />
+                                                    </td>
+                                                    <td class="text-xs text-center" ng-bind="(pagingInfo.itemsPerPage * (pagingInfo.page - 1)) + $index + 1"></td>
+                                                    <td class="text-xs" ng-bind="tc.TemplateName"></td>
+                                                    <td class="text-xs" ng-bind="tc.Description"></td>
+                                                    <td class="text-xs" ng-bind="tc.Amount"></td>
+                                                    <td class="text-xs" ng-bind="tc.Condition"></td>
+                                                    <td class="text-xs" ng-bind="tc.TemplatePath"></td>
+                                                    <td class="text-xs text-center"><span ng-class="(tc.Published === 'True')? 'badge badge-success' : 'badge badge-danger'" ng-bind="(tc.Published === 'True')? 'Active' : 'Inactive'"></span></td>
+                                                    <td class="text-xs text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">
+                                                        <button type="button" class="btn btn-secondary btn-circle btn-sm" data-toggle="modal" data-target="#createTemplateConditionModal" ng-if="Ctrl.wEdit" ng-click="EditTemplateConditionData(tc)"><i class="fas fa-pencil-alt"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-circle btn-sm" ng-if="Ctrl.wDelete" ng-click="DeleteTemplateCondition(tc)"><i class="fas fa-trash-alt"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{pagingInfo.page}} to {{pagingInfo.totalItems/pagingInfo.itemsPerPage | roundup }} of {{pagingInfo.totalItems}} entries</div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                            <ul uib-pagination total-items="(10 * pagingInfo.totalItems)/pagingInfo.itemsPerPage" ng-model="pagingInfo.page" ng-change="selectPage(pagingInfo.page)" max-size="10" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+
+        <div class="modal fade" id="createTemplateConditionModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Template <small>Condition</small></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form name="TemplateConditionForm" novalidate role="form" autocomplete="off">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group col-md-4 col-sm-12  has-feedback" show-errors>
+                                    <label for="TemplateID2">Template <small>*</small></label>
+                                    <select class="form-control form-control-sm" id="TemplateID2" name="TemplateID" ng-model="data.TemplateID" ng-required="true">
+                                        <option value="">Please select...</option>
+                                        <option ng-repeat="tp in Template" value="{{tp.Id}}">{{tp.Name}}</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="TemplateConditionForm.TemplateID.$error.required">You can't leave this empty.</div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-12 has-feedback" show-errors>
+                                    <label for="TemplatePath">Template Path <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" id="TemplatePath" name="TemplatePath" ng-model="data.TemplatePath" ng-required="true" placeholder="Template Path">
+                                    <div style="color:red" class="invalid-feedback" ng-if="TemplateConditionForm.TemplatePath.$error.required">You can't leave this empty.</div>
+                                </div>
+                                <div class="form-group col-md-2 col-sm-12  has-feedback" show-errors>
+                                    <label for="IsCustomTemplate">Custom Template <small>*</small></label>
+                                    <select class="form-control form-control-sm" id="IsCustomTemplate" name="IsCustomTemplate" ng-model="data.IsCustomTemplate" ng-required="true">
+                                        <option value="True">Yes</option>
+                                        <option value="False">No</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="TemplateConditionForm.IsCustomTemplate.$error.required">You can't leave this empty.</div>
+                                </div>
+                                <div class="form-group col-md-2 col-sm-12  has-feedback" show-errors>
+                                    <label for="published">Published <small>*</small></label>
+                                    <select class="form-control form-control-sm" id="Published" name="Published" ng-model="data.Published" ng-required="true">
+                                        <option value="True">Active</option>
+                                        <option value="False">Inactive</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="TemplateConditionForm.Published.$error.required">You can't leave this empty.</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4 col-sm-12 has-feedback" show-errors>
+                                    <label for="Description">Description <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" id="Description" name="Description" ng-model="data.Description" ng-required="true" placeholder="Name">
+                                    <div style="color:red" class="invalid-feedback" ng-if="TemplateConditionForm.Description.$error.required">You can't leave this empty.</div>
+                                </div>
+                                <div class="form-group col-md-2 col-sm-12 has-feedback" show-errors>
+                                    <label for="Amount">Amount 1 <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" id="Amount" name="Amount" ng-model="data.Amount" ng-required="true" placeholder="Amount">
+                                    <div style="color:red" class="invalid-feedback" ng-if="TemplateConditionForm.Amount.$error.required">You can't leave this empty.</div>
+                                </div>
+                                <div class="form-group col-md-2 col-sm-12 has-feedback" show-errors>
+                                    <label for="show">Amount 2 <small ng-if="data.Condition === 'between'">*</small></label>
+                                    <input type="number" class="form-control form-control-sm" id="Amount2" name="Amount2" ng-model="data.Amount2" ng-required="data.Condition === 'between'" ng-disabled="data.Condition !== 'between'" placeholder="0">
+                                    <div style="color:red" class="invalid-feedback" ng-if="(data.Condition === 'between')? validateConditionForm && ConditionForm.Amount.$error.required : ''">You can't leave this empty.</div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-12 has-feedback" show-errors>
+                                    <label for="Condition">Condition <small>*</small></label>
+                                    <select class="form-control form-control-sm" id="Condition" name="Condition" ng-model="data.Condition" ng-required="true">
+                                        <option value="equal" ng-selected="data.Condition === 'equal'">equal</option>
+                                        <option value="greater than equal" ng-selected="data.Condition === 'greater than equal'">greater than equal</option>
+                                        <option value="less than equal" ng-selected="data.Condition === 'less than equal'">less than equal</option>
+                                        <option value="greater than" ng-selected="data.Condition === 'greater than'">greater than</option>
+                                        <option value="less than" ng-selected="data.Condition === 'less than'">less than</option>
+                                        <option value="not equal" ng-selected="data.Condition === 'not equal'">not equal</option>
+                                        <option value="between" ng-selected="data.Condition === 'between'">between</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="TemplateConditionForm.Condition.$error.required">You can't leave this empty.</div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                            <div class="row" ng-if="data.IsCustomTemplate === 'False'">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="Body">Body</label>
+                                        @*<textarea name="Guidelines" id="Guidelines" class="form-control form-control-sm" rows="10" ng-model="data.Guidelines"></textarea>*@
+                                        <summernote config="options" ng-model="data.Guidelines"></summernote>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                            <div class="row" ng-if="data.VoucherBase64 !== ''">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <a href="~/Report/PreviewVoucher?conditionid={{data.Id}}" class="font-weight-bold" target="_blank"><i class="fa fa-image"></i> Click here to view the E-Voucher</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="ClearData()">Close</button>
+                            <button type="button" class="btn btn-secondary btn-sm" ng-click="SaveTemplateCondition(data)">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </section>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/TemplateCondition.js"></script>
+}
+
+@section csss{
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Content/plugins/summernote/summernote-bs4.css">
+}

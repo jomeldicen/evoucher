@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="Role" ng-init="init('@ViewBag.PageUrl')">
+    <section class="content" ng-init="GetRoleData()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header card-gray card-outline">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12 col-md-12">
+                                        <button type="button" class="btn btn-danger btn-sm float-right" ng-if="Ctrl.wDelete" ng-click="DeleteData(Role)">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm float-right mr-1" ng-if="Ctrl.wEdit" ng-click="StatusData(Role, 0)">
+                                            <i class="fas fa-times-circle"></i> Deactivate
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm float-right mr-1" ng-if="Ctrl.wEdit" ng-click="StatusData(Role, 1)">
+                                            <i class="fas fa-check-circle"></i> Activate
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-sm float-right mr-1" data-toggle="modal" data-target="#createRoleModal" ng-if="Ctrl.wAdd" ng-click="GetMenuData(0)">
+                                            <i class="fas fa-plus-circle"></i> Create
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length form-inline">
+                                            <label>
+                                                Show
+                                                <select name="example1_length" class="form-control form-control-sm" ng-model="pagingInfo.itemsPerPage" ng-change="setItemsPerPage(pagingInfo.itemsPerPage)">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select> entries
+                                            </label>
+                                            <img src="~/Content/dist/img/ajax-loader2.gif" ng-show="loading" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <form ng-submit="search()" role="form">
+                                            <div class="form-inline dataTables_filter">
+                                                <label>
+                                                    Search:
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" ng-model="pagingInfo.search">
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="text-center" width="3%">
+                                                        <input type="checkbox" name="checkAll" id="checkAll" ng-model="selectedAll" ng-click="selectAll()" ng-disabled="!Ctrl.wDelete || !Ctrl.wEdit" />
+                                                    </th>
+                                                    <th class="sorting" width="4%" ng-click="sort('Id')">Nos</th>
+                                                    <th class="sorting" ng-click="sort('Name')">Role Name</th>
+                                                    <th class="sorting" ng-click="sort('IndexPage')">Dashboard</th>
+                                                    <th>No of Total User</th>
+                                                    <th class="text-center sorting" ng-click="sort('Published')">Status</th>
+                                                    <th class="text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="pagingInfo.totalItems == 0">
+                                                    <td colspan="6"><center>No data to display</center></td>
+                                                </tr>
+                                                <tr ng-if="pagingInfo.totalItems > 0" ng-repeat="rl in Role">
+                                                    <td class="text-center">
+                                                        <input type="checkbox" name="check" id="check{{$index + 1}}" ng-model="rl.isChecked" ng-change="checkSelected(rl.isChecked)" ng-disabled="!Ctrl.wDelete || !Ctrl.wEdit" />
+                                                    </td>
+                                                    <td ng-bind="(pagingInfo.itemsPerPage * (pagingInfo.page - 1)) + $index + 1"></td>
+                                                    <td ng-bind="rl.Name"></td>
+                                                    <td ng-bind="rl.IndexPage"></td>
+                                                    <td ng-bind="rl.totalUser"></td>
+                                                    <td class="text-center"><span ng-class="(rl.Published === 'True')? 'badge badge-success' : 'badge badge-danger'" ng-bind="(rl.Published === 'True')? 'Active' : 'Inactive'"></span></td>
+                                                    <td class="text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">
+                                                        <button type="button" class="btn btn-secondary btn-circle btn-sm" data-toggle="modal" data-target="#createRoleModal" ng-if="Ctrl.wEdit" ng-click="EditRoleData(rl)"><i class="fas fa-pencil-alt"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-circle btn-sm" ng-if="Ctrl.wDelete" ng-click="DeleteRole(rl)"><i class="fas fa-trash-alt"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{pagingInfo.page}} to {{pagingInfo.totalItems/pagingInfo.itemsPerPage | roundup }} of {{pagingInfo.totalItems}} entries</div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                            <ul uib-pagination total-items="(10 * pagingInfo.totalItems)/pagingInfo.itemsPerPage" ng-model="pagingInfo.page" ng-change="selectPage(pagingInfo.page)" max-size="10" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+    <div class="modal fade" id="createRoleModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Role</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form name="roleForm" novalidate role="form">
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <div class="row">
+                            <div class="form-group col-6 has-feedback" show-errors>
+                                <label for="roleName">Role Name</label>
+                                <input type="text" class="form-control form-control-sm" id="roleName" name="roleName" ng-model="data.Name" ng-required="true" placeholder="Role Name">
+                                <div style="color:red" class="invalid-feedback" ng-if="roleForm.roleName.$error.required">You can't leave this empty.</div>
+                            </div>
+                            <div class="form-group col-4 has-feedback" show-errors>
+                                <label for="dashboard">Index Page</label>
+                                <select class="form-control form-control-sm" id="dashboard" name="dashboard" ng-model="data.IndexPage" ng-required="true">
+                                    <option value="">Select Please ...</option>
+                                    <option ng-selected="data.IndexPage == '/Admin/Profile'" value="/Admin/Profile">/Admin/Profile</option>
+                                    <option ng-repeat="id in Index" ng-selected="data.IndexPage == id.nvPageUrl" value="{{id.nvPageUrl}}">{{id.nvPageUrl}}</option>
+                                </select>
+                                <div style="color:red" class="invalid-feedback" ng-if="roleForm.dashboard.$error.required">You can't leave this empty.</div>
+                            </div>
+                            <div class="form-group col-2 has-feedback" show-errors>
+                                <label for="published">Published</label>
+                                <select class="form-control form-control-sm" id="published" name="published" ng-model="data.Published" ng-required="true">
+                                    <option value="True">Active</option>
+                                    <option value="False">Inactive</option>
+                                </select>
+                                <div style="color:red" class="invalid-feedback" ng-if="roleForm.published.$error.required">You can't leave this empty.</div>
+                            </div>
+                            <div class="form-group col-12 mb-0 overflow-auto" style="max-height: 350px;">
+                                <label for="roleName">Menu Permission</label>
+                                <table class="table table-bordered table-striped customTable mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl#</th>
+                                            <th>Menu</th>
+                                            <th class="text-center">Access</th>
+                                            <th class="text-center">Controls</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="mn in Menu">
+                                            <td ng-bind="$index + 1"></td>
+                                            <td ng-bind="mn.NameWithParent"></td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="check" id="check{{$index + 1}}" ng-model="mn.isChecked" />
+                                            </td>
+                                            <td class="text-center p-1 multi-td" ng-if="(mn.ControlIDs.length > 0)? true : false">
+                                                <div ng-dropdown-multiselect="" options="mn.ControlIDs" selected-model="mn.OptionIDs" checkboxes="true" extra-settings="setting1"></div>
+                                            </td>
+                                            <td class="text-center text-muted" ng-if="(mn.ControlIDs.length === 0)? true : false"><small>{{(mn.nvPageUrl === "#")? "" : "No available controls" }}</small></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Sl#</th>
+                                            <th>Menu</th>
+                                            <th class="text-center">Access</th>
+                                            <th class="text-center">Controls</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="ClearData()">Close</button>
+                        <button type="button" class="btn btn-secondary btn-sm" ng-click="SaveRole(data, Menu)">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+@section scripts{
+    <script src="~/Scripts/lodash.min.js"></script>
+    <script src="~/Scripts/ProjectScriptFile/Role.js"></script>
+}

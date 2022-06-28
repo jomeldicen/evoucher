@@ -1,0 +1,178 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="VerificationMasterlist">
+    <section class="content" ng-init="GetVerificationMasterlistData()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header card-gray card-outline">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                                <div class="row mb-2">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="btn-group btn-group-sm float-right mr-1" ng-if="Ctrl.wDownload">
+                                            <button type="button" class="btn btn-default">Report</button>
+                                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                @Html.ActionLink("Master List", "ExportReport", "Report", new {  }, new { @class = "dropdown-item" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length form-inline">
+                                            <label>
+                                                Show
+                                                <select name="example1_length" class="form-control form-control-sm" ng-model="pagingInfo.itemsPerPage" ng-change="setItemsPerPage(pagingInfo.itemsPerPage)">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select> entries
+                                            </label>
+                                            <img src="~/Content/dist/img/ajax-loader2.gif" ng-show="loading" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-inline dataTables_filter">
+                                            <label>
+                                                Search:
+                                                <input type="search" class="form-control form-control-sm mr-1" placeholder="" ng-model="pagingInfo.search">
+                                                <select class="form-control form-control-sm mr-1" id="TemplateID" name="TemplateID" ng-model="pagingInfo.value1">
+                                                    <option value="">Please select...</option>
+                                                    <option ng-repeat="tp in Template" value="{{tp.Id}}">{{tp.Name}}</option>
+                                                </select>
+                                                <button type="button" class="btn btn-default btn-sm  mr-1" ng-click="search()">
+                                                    <i class="fas fa-search"></i> 
+                                                </button>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="sorting" width="4%" ng-click="sort('Id')">Nos</th>
+                                                    <th class="sorting" ng-click="sort('Recipient')">Guest Info</th>
+                                                    <th class="sorting" ng-click="sort('VoucherCode')">Voucher Info</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="pagingInfo.totalItems == 0">
+                                                    <td colspan="3"><center>No data to display</center></td>
+                                                </tr>
+                                                <tr ng-if="pagingInfo.totalItems > 0" ng-repeat="to in VerificationMasterlist">
+                                                    <td ng-bind="(pagingInfo.itemsPerPage * (pagingInfo.page - 1)) + $index + 1"></td>
+                                                    <td>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-5 mb-0">Name of Guest</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.Recipient}}</dd>
+                                                            <dt class="col-sm-5 mb-0">Email Sending Status
+                                                                <a href="" class="badge badge-info" ng-click="ResendEmail(to)">
+                                                                    <i class="fas fa-envelope"></i> Resend?
+                                                                </a>
+                                                            </dt>
+                                                            <dd class="col-sm-7 mb-0 "><span ng-class="(to.IsEmailSent === 'Success')? 'badge badge-success' : 'badge badge-danger'">{{to.IsEmailSent}}</span></dd>
+                                                            <dt class="col-sm-5 mb-0">Email Return Message</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.EmailErrorLog}}</dd>
+                                                            <dt class="col-sm-5 mb-0">Email Sent Date</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.EmailSentDate | date : "MM/dd/y" }}</dd>
+                                                        </dl>
+                                                    </td>
+                                                    <td>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-5 mb-0">Voucher Code</dt>
+                                                            <dd class="col-sm-7 mb-0"><a href="~/Report/ViewVoucher?uniqueid={{to.UniqueID}}" target="_blank">{{to.VoucherCode}}</a></dd>
+                                                            <dt class="col-sm-5 mb-0">Amount</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.Amount | currency : "Php "}}</dd>
+                                                            <dt class="col-sm-5 mb-0">Property</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.PropertyName}}</dd>
+                                                            <dt class="col-sm-5 mb-0">Merchant</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.MerchantName}}</dd>
+                                                            <dt class="col-sm-5 mb-0">Date Scan</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.ProcessDate | date : "MM/dd/y"}}</dd>
+                                                            <dt class="col-sm-5 mb-0">Template</dt>
+                                                            <dd class="col-sm-7 mb-0">{{to.TemplateName}}</dd>
+                                                        </dl>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{pagingInfo.page}} to {{pagingInfo.totalItems/pagingInfo.itemsPerPage | roundup }} of {{pagingInfo.totalItems}} entries</div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                            <ul uib-pagination total-items="(10 * pagingInfo.totalItems)/pagingInfo.itemsPerPage" ng-model="pagingInfo.page" ng-change="selectPage(pagingInfo.page)" max-size="10" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="Ctrl.wPrint">
+                                    <div class="col-sm-12 col-md-12">
+                                        <button type="button" class="btn btn-secondary btn-sm float-right" ng-click="ExportReport('Print')">
+                                            <i class="fas fa-print"></i> Report
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+
+        <div class="modal fade" id="viewVoucherModal">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <img src="{{'data:image/jpeg;base64,' + data.VoucherBase64}}" @*class="img-fluid"*@ alt="Responsive image" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="ClearData()">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </section>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/VerificationMasterlist.js"></script>
+}

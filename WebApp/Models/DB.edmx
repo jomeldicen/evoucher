@@ -1,0 +1,2179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="superadminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IndexPage" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="vAspNetUserRolesID" />
+          </Key>
+          <Property Name="vAspNetUserRolesID" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="BlockedAccount" Type="bit" Nullable="false" />
+          <Property Name="ResetPassword" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersLoginHistory">
+          <Key>
+            <PropertyRef Name="vULHID" />
+          </Key>
+          <Property Name="vULHID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="dLogIn" Type="datetime" Nullable="false" />
+          <Property Name="dLogOut" Type="datetime" />
+          <Property Name="nvIPAddress" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersMenu">
+          <Key>
+            <PropertyRef Name="vMenuID" />
+          </Key>
+          <Property Name="vMenuID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="nvMenuName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="iSerialNo" Type="int" Nullable="false" />
+          <Property Name="nvFabIcon" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="vParentMenuID" Type="nvarchar" MaxLength="128" />
+          <Property Name="nvPageUrl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PrefixCode" Type="varchar" MaxLength="20" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersMenuControls">
+          <Key>
+            <PropertyRef Name="vMenuControlID" />
+          </Key>
+          <Property Name="vMenuControlID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="vMenuID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OptionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersMenuPermission">
+          <Key>
+            <PropertyRef Name="vMenuPermissionID" />
+          </Key>
+          <Property Name="vMenuPermissionID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="vMenuID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="wView" Type="bit" Nullable="false" />
+          <Property Name="wAdd" Type="bit" Nullable="false" />
+          <Property Name="wEdit" Type="bit" Nullable="false" />
+          <Property Name="wDelete" Type="bit" Nullable="false" />
+          <Property Name="wExtract" Type="bit" Nullable="false" />
+          <Property Name="wPrint" Type="bit" Nullable="false" />
+          <Property Name="wDownload" Type="bit" Nullable="false" />
+          <Property Name="wUpload" Type="bit" Nullable="false" />
+          <Property Name="wSnyc" Type="bit" Nullable="false" />
+          <Property Name="wFetch" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersMenuPermissionControls">
+          <Key>
+            <PropertyRef Name="vPermissionControlID" />
+          </Key>
+          <Property Name="vPermissionControlID" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="vMenuPermissionID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="vRoleID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OptionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersPageVisited">
+          <Key>
+            <PropertyRef Name="vPageVisitedID" />
+          </Key>
+          <Property Name="vPageVisitedID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="dDateVisited" Type="datetime" Nullable="false" />
+          <Property Name="nvPageName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="nvIPAddress" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="vFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vLastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vMiddleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vPhoto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="vCompany" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="vPosition" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="vRank" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="vDepartment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vMenuID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EventType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EventName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ObjectType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContentDetail" Type="text" />
+          <Property Name="IPAddress" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="EmailSubject" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="EmailBody" Type="varchar(max)" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Merchant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="250" />
+          <Property Name="MerchantImage" Type="varchar" MaxLength="150" />
+          <Property Name="Section" Type="varchar" MaxLength="150" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Options">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="OptionGroup" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Location" Type="varchar" MaxLength="150" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="250" />
+          <Property Name="PropertyImage" Type="varchar" MaxLength="150" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UniqueID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProcessDate" Type="datetime" Nullable="false" />
+          <Property Name="IsEmailSent" Type="bit" Nullable="false" />
+          <Property Name="EmailSentTo" Type="varchar" MaxLength="250" />
+          <Property Name="EmailDetail" Type="varchar(max)" />
+          <Property Name="EmailSentDate" Type="datetime" Nullable="false" />
+          <Property Name="EmailResentDate" Type="datetime" />
+          <Property Name="EmailErrorLog" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SendingLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoucherId" Type="int" Nullable="false" />
+          <Property Name="HashCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="vSettingID" />
+          </Key>
+          <Property Name="vSettingID" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="vSettingName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="vSettingOption" Type="varchar(max)" />
+          <Property Name="vSettingGroup" Type="varchar" MaxLength="250" />
+          <Property Name="vSettingLabel" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Amount2" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Condition" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TemplatePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="Guidelines" Type="nvarchar(max)" />
+          <Property Name="VoucherBase64" Type="nvarchar(max)" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="IsCustomTemplate" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TempCondID" Type="nvarchar" MaxLength="128" />
+          <Property Name="EventName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UniqueID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Recipient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VoucherCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UrlLink" Type="varchar(max)" />
+          <Property Name="VoucherBase64" Type="nvarchar(max)" />
+          <Property Name="WithDiscrepancy" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="VoucherStatus" Type="varchar" MaxLength="50" />
+          <Property Name="GenerationID" Type="varchar" MaxLength="50" />
+          <Property Name="MerchantID" Type="int" />
+          <Property Name="ClaimedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByPK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WebAPPv3EV.dbo.VW_VoucherStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_VoucherStatus">
+          <Key>
+            <PropertyRef Name="UniqueID" />
+            <PropertyRef Name="EventName" />
+            <PropertyRef Name="Recipient" />
+            <PropertyRef Name="VoucherCode" />
+            <PropertyRef Name="Amount" />
+          </Key>
+          <Property Name="TemplateID" Type="int" />
+          <Property Name="TemplateName" Type="varchar" MaxLength="250" />
+          <Property Name="UniqueID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EventName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Recipient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VoucherCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VoucherStatus" Type="varchar" MaxLength="50" />
+          <Property Name="ClaimedDate" Type="datetime" />
+          <Property Name="ProcessDate" Type="datetime" />
+          <Property Name="PropertyName" Type="varchar" MaxLength="250" />
+          <Property Name="PropertyLocation" Type="varchar" MaxLength="150" />
+          <Property Name="PropertyEmail" Type="varchar" MaxLength="150" />
+          <Property Name="MerchantName" Type="varchar" MaxLength="250" />
+          <Property Name="MerchantEmail" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersLoginHistory_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersLoginHistory" Type="Self.AspNetUsersLoginHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersLoginHistory">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenu_AspNetUsersCreated">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersMenu" Type="Self.AspNetUsersMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenu">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenu_AspNetUsersMenu">
+          <End Role="AspNetUsersMenu" Type="Self.AspNetUsersMenu" Multiplicity="0..1" />
+          <End Role="AspNetUsersMenu1" Type="Self.AspNetUsersMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenu1">
+              <PropertyRef Name="vParentMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenu_AspNetUsersModified">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersMenu" Type="Self.AspNetUsersMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenu">
+              <PropertyRef Name="ModifiedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenuControls_AspNetUsersMenu">
+          <End Role="AspNetUsersMenu" Type="Self.AspNetUsersMenu" Multiplicity="1" />
+          <End Role="AspNetUsersMenuControls" Type="Self.AspNetUsersMenuControls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuControls">
+              <PropertyRef Name="vMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenuControls_Options">
+          <End Role="Options" Type="Self.Options" Multiplicity="1" />
+          <End Role="AspNetUsersMenuControls" Type="Self.AspNetUsersMenuControls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Options">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuControls">
+              <PropertyRef Name="OptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenuPermission_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetUsersMenuPermission" Type="Self.AspNetUsersMenuPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuPermission">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenuPermission_AspNetUsersMenu">
+          <End Role="AspNetUsersMenu" Type="Self.AspNetUsersMenu" Multiplicity="1" />
+          <End Role="AspNetUsersMenuPermission" Type="Self.AspNetUsersMenuPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuPermission">
+              <PropertyRef Name="vMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenuPermissionControls_Options">
+          <End Role="Options" Type="Self.Options" Multiplicity="1" />
+          <End Role="AspNetUsersMenuPermissionControls" Type="Self.AspNetUsersMenuPermissionControls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Options">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuPermissionControls">
+              <PropertyRef Name="OptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersPageVisited_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersPageVisited" Type="Self.AspNetUsersPageVisited" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersPageVisited">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersProfile_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsersProfile" Type="Self.AspNetUsersProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersProfile">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChangeLog_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="ChangeLog" Type="Self.ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChangeLog_AspNetUsersMenu">
+          <End Role="AspNetUsersMenu" Type="Self.AspNetUsersMenu" Multiplicity="1" />
+          <End Role="ChangeLog" Type="Self.ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="vMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailTemplate_AspNetUsersCreated">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="EmailTemplate" Type="Self.EmailTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailTemplate">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailTemplate_AspNetUsersModified">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="EmailTemplate" Type="Self.EmailTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailTemplate">
+              <PropertyRef Name="ModifiedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merchant_Property">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="Merchant" Type="Self.Merchant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Merchant">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Options_AspNetUsersCreated">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Options" Type="Self.Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Options_AspNetUsersModified">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Options" Type="Self.Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options">
+              <PropertyRef Name="ModifiedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Template_Property">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="Template" Type="Self.Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateCondition_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="TemplateCondition" Type="Self.TemplateCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateCondition">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Merchant">
+          <End Role="Merchant" Type="Self.Merchant" Multiplicity="0..1" />
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="MerchantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_TemplateCondition">
+          <End Role="TemplateCondition" Type="Self.TemplateCondition" Multiplicity="0..1" />
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateCondition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="TempCondID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spPermissionControls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="nvarchar" Mode="In" />
+          <Parameter Name="nvPageUrl" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="superadminModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersLoginHistory" EntityType="Self.AspNetUsersLoginHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersMenu" EntityType="Self.AspNetUsersMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersMenuControls" EntityType="Self.AspNetUsersMenuControls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersMenuPermission" EntityType="Self.AspNetUsersMenuPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersMenuPermissionControls" EntityType="Self.AspNetUsersMenuPermissionControls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersPageVisited" EntityType="Self.AspNetUsersPageVisited" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersProfile" EntityType="Self.AspNetUsersProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChangeLog" EntityType="Self.ChangeLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Merchant" EntityType="Self.Merchant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Options" EntityType="Self.Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Property" EntityType="Self.Property" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SendingLog" EntityType="Self.SendingLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateCondition" EntityType="Self.TemplateCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_VoucherStatus" EntityType="Self.VW_VoucherStatus" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_VoucherStatus].[TemplateID] AS [TemplateID], 
+    [VW_VoucherStatus].[TemplateName] AS [TemplateName], 
+    [VW_VoucherStatus].[UniqueID] AS [UniqueID], 
+    [VW_VoucherStatus].[EventName] AS [EventName], 
+    [VW_VoucherStatus].[Recipient] AS [Recipient], 
+    [VW_VoucherStatus].[VoucherCode] AS [VoucherCode], 
+    [VW_VoucherStatus].[Amount] AS [Amount], 
+    [VW_VoucherStatus].[VoucherStatus] AS [VoucherStatus], 
+    [VW_VoucherStatus].[ClaimedDate] AS [ClaimedDate], 
+    [VW_VoucherStatus].[ProcessDate] AS [ProcessDate], 
+    [VW_VoucherStatus].[PropertyName] AS [PropertyName], 
+    [VW_VoucherStatus].[PropertyLocation] AS [PropertyLocation], 
+    [VW_VoucherStatus].[PropertyEmail] AS [PropertyEmail], 
+    [VW_VoucherStatus].[MerchantName] AS [MerchantName], 
+    [VW_VoucherStatus].[MerchantEmail] AS [MerchantEmail]
+    FROM [dbo].[VW_VoucherStatus] AS [VW_VoucherStatus]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AspNetUsersLoginHistory_AspNetUsers" Association="Self.FK_AspNetUsersLoginHistory_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersLoginHistory" EntitySet="AspNetUsersLoginHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenu_AspNetUsersCreated" Association="Self.FK_AspNetUsersMenu_AspNetUsersCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenu_AspNetUsersMenu" Association="Self.FK_AspNetUsersMenu_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenu" />
+            <End Role="AspNetUsersMenu1" EntitySet="AspNetUsersMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenu_AspNetUsersModified" Association="Self.FK_AspNetUsersMenu_AspNetUsersModified">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenuControls_AspNetUsersMenu" Association="Self.FK_AspNetUsersMenuControls_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenu" />
+            <End Role="AspNetUsersMenuControls" EntitySet="AspNetUsersMenuControls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenuControls_Options" Association="Self.FK_AspNetUsersMenuControls_Options">
+            <End Role="Options" EntitySet="Options" />
+            <End Role="AspNetUsersMenuControls" EntitySet="AspNetUsersMenuControls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenuPermission_AspNetRoles" Association="Self.FK_AspNetUsersMenuPermission_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsersMenuPermission" EntitySet="AspNetUsersMenuPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenuPermission_AspNetUsersMenu" Association="Self.FK_AspNetUsersMenuPermission_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenu" />
+            <End Role="AspNetUsersMenuPermission" EntitySet="AspNetUsersMenuPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenuPermissionControls_Options" Association="Self.FK_AspNetUsersMenuPermissionControls_Options">
+            <End Role="Options" EntitySet="Options" />
+            <End Role="AspNetUsersMenuPermissionControls" EntitySet="AspNetUsersMenuPermissionControls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersPageVisited_AspNetUsers" Association="Self.FK_AspNetUsersPageVisited_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersPageVisited" EntitySet="AspNetUsersPageVisited" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersProfile_AspNetUsers" Association="Self.FK_AspNetUsersProfile_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersProfile" EntitySet="AspNetUsersProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChangeLog_AspNetUsers" Association="Self.FK_ChangeLog_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ChangeLog" EntitySet="ChangeLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChangeLog_AspNetUsersMenu" Association="Self.FK_ChangeLog_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenu" />
+            <End Role="ChangeLog" EntitySet="ChangeLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailTemplate_AspNetUsersCreated" Association="Self.FK_EmailTemplate_AspNetUsersCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="EmailTemplate" EntitySet="EmailTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailTemplate_AspNetUsersModified" Association="Self.FK_EmailTemplate_AspNetUsersModified">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="EmailTemplate" EntitySet="EmailTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merchant_Property" Association="Self.FK_Merchant_Property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="Merchant" EntitySet="Merchant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Options_AspNetUsersCreated" Association="Self.FK_Options_AspNetUsersCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Options" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Options_AspNetUsersModified" Association="Self.FK_Options_AspNetUsersModified">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Options" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_Property" Association="Self.FK_Template_Property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="Template" EntitySet="Template" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateCondition_Template" Association="Self.FK_TemplateCondition_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="TemplateCondition" EntitySet="TemplateCondition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Merchant" Association="Self.FK_Voucher_Merchant">
+            <End Role="Merchant" EntitySet="Merchant" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_TemplateCondition" Association="Self.FK_Voucher_TemplateCondition">
+            <End Role="TemplateCondition" EntitySet="TemplateCondition" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IndexPage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AspNetUsersMenuPermissions" Relationship="Self.FK_AspNetUsersMenuPermission_AspNetRoles" FromRole="AspNetRoles" ToRole="AspNetUsersMenuPermission" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserRole">
+          <Key>
+            <PropertyRef Name="vAspNetUserRolesID" />
+          </Key>
+          <Property Name="vAspNetUserRolesID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRole" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
+          <NavigationProperty Name="AspNetUsersLoginHistories" Relationship="Self.FK_AspNetUsersLoginHistory_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsersLoginHistory" />
+          <NavigationProperty Name="AspNetUsersPageVisiteds" Relationship="Self.FK_AspNetUsersPageVisited_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsersPageVisited" />
+          <NavigationProperty Name="Options" Relationship="WebAppModel.FK_Options_AspNetUsersCreated" FromRole="AspNetUser" ToRole="Option" />
+          <NavigationProperty Name="Options1" Relationship="WebAppModel.FK_Options_AspNetUsersModified" FromRole="AspNetUser" ToRole="Option" />
+          <NavigationProperty Name="AspNetUsersMenus" Relationship="WebAppModel.FK_AspNetUsersMenu_AspNetUsersCreated" FromRole="AspNetUser" ToRole="AspNetUsersMenu" />
+          <NavigationProperty Name="AspNetUsersMenus1" Relationship="WebAppModel.FK_AspNetUsersMenu_AspNetUsersModified" FromRole="AspNetUser" ToRole="AspNetUsersMenu" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="BlockedAccount" Type="Boolean" Nullable="false" />
+          <Property Name="ResetPassword" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsersProfile" Relationship="WebAppModel.FK_AspNetUsersProfile_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetUsersProfile" />
+          <NavigationProperty Name="ChangeLogs" Relationship="WebAppModel.FK_ChangeLog_AspNetUsers" FromRole="AspNetUser" ToRole="ChangeLog" />
+          <NavigationProperty Name="EmailTemplates" Relationship="WebAppModel.FK_EmailTemplate_AspNetUsersCreated" FromRole="AspNetUser" ToRole="EmailTemplate" />
+          <NavigationProperty Name="EmailTemplates1" Relationship="WebAppModel.FK_EmailTemplate_AspNetUsersModified" FromRole="AspNetUser" ToRole="EmailTemplate" />
+          </EntityType>
+        <EntityType Name="AspNetUsersLoginHistory">
+          <Key>
+            <PropertyRef Name="vULHID" />
+          </Key>
+          <Property Name="vULHID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dLogIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dLogOut" Type="DateTime" Precision="3" />
+          <Property Name="nvIPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUsersLoginHistory_AspNetUsers" FromRole="AspNetUsersLoginHistory" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsersMenuPermission">
+          <Key>
+            <PropertyRef Name="vMenuPermissionID" />
+          </Key>
+          <Property Name="vMenuPermissionID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="vMenuID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRole" Relationship="Self.FK_AspNetUsersMenuPermission_AspNetRoles" FromRole="AspNetUsersMenuPermission" ToRole="AspNetRoles" />
+          <Property Name="wEdit" Type="Boolean" Nullable="false" />
+          <Property Name="wView" Type="Boolean" Nullable="false" />
+          <Property Name="wAdd" Type="Boolean" Nullable="false" />
+          <Property Name="wDelete" Type="Boolean" Nullable="false" />
+          <Property Name="wExtract" Type="Boolean" Nullable="false" />
+          <Property Name="wPrint" Type="Boolean" Nullable="false" />
+          <Property Name="wDownload" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsersMenu" Relationship="WebAppModel.FK_AspNetUsersMenuPermission_AspNetUsersMenu" FromRole="AspNetUsersMenuPermission" ToRole="AspNetUsersMenu" />
+          <Property Name="wUpload" Type="Boolean" Nullable="false" />
+          <Property Name="wSnyc" Type="Boolean" Nullable="false" />
+          <Property Name="wFetch" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsersPageVisited">
+          <Key>
+            <PropertyRef Name="vPageVisitedID" />
+          </Key>
+          <Property Name="vPageVisitedID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dDateVisited" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nvPageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nvIPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUsersPageVisited_AspNetUsers" FromRole="AspNetUsersPageVisited" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="vSettingID" />
+          </Key>
+          <Property Name="vSettingID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vSettingName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vSettingOption" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="vSettingGroup" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="vSettingLabel" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersMenuPermission_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="1" />
+          <End Role="AspNetUsersMenuPermission" Type="Self.AspNetUsersMenuPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuPermission">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersLoginHistory_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AspNetUsersLoginHistory" Type="Self.AspNetUsersLoginHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersLoginHistory">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersPageVisited_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AspNetUsersPageVisited" Type="Self.AspNetUsersPageVisited" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersPageVisited">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRole" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="AspNetUsersLoginHistories" EntityType="Self.AspNetUsersLoginHistory" />
+          <EntitySet Name="AspNetUsersMenuPermissions" EntityType="Self.AspNetUsersMenuPermission" />
+          <EntitySet Name="AspNetUsersPageVisiteds" EntityType="Self.AspNetUsersPageVisited" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <AssociationSet Name="FK_AspNetUsersMenuPermission_AspNetRoles" Association="Self.FK_AspNetUsersMenuPermission_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsersMenuPermission" EntitySet="AspNetUsersMenuPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersLoginHistory_AspNetUsers" Association="Self.FK_AspNetUsersLoginHistory_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersLoginHistory" EntitySet="AspNetUsersLoginHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersPageVisited_AspNetUsers" Association="Self.FK_AspNetUsersPageVisited_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersPageVisited" EntitySet="AspNetUsersPageVisiteds" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(WebAppModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(WebAppModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="AspNetUsersMenus" EntityType="WebAppModel.AspNetUsersMenu" />
+          <AssociationSet Name="FK_AspNetUsersMenu_AspNetUsersMenu" Association="WebAppModel.FK_AspNetUsersMenu_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenus" />
+            <End Role="AspNetUsersMenu1" EntitySet="AspNetUsersMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenuPermission_AspNetUsersMenu" Association="WebAppModel.FK_AspNetUsersMenuPermission_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenus" />
+            <End Role="AspNetUsersMenuPermission" EntitySet="AspNetUsersMenuPermissions" />
+          </AssociationSet>
+          <EntitySet Name="Options" EntityType="WebAppModel.Option" />
+          <AssociationSet Name="FK_Options_AspNetUsersCreated" Association="WebAppModel.FK_Options_AspNetUsersCreated">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Option" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Options_AspNetUsersModified" Association="WebAppModel.FK_Options_AspNetUsersModified">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Option" EntitySet="Options" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsersMenuControls" EntityType="WebAppModel.AspNetUsersMenuControl" />
+          <AssociationSet Name="FK_AspNetUsersMenuControls_AspNetUsersMenu" Association="WebAppModel.FK_AspNetUsersMenuControls_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenus" />
+            <End Role="AspNetUsersMenuControl" EntitySet="AspNetUsersMenuControls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenuControls_Options" Association="WebAppModel.FK_AspNetUsersMenuControls_Options">
+            <End Role="Option" EntitySet="Options" />
+            <End Role="AspNetUsersMenuControl" EntitySet="AspNetUsersMenuControls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenu_AspNetUsersCreated" Association="WebAppModel.FK_AspNetUsersMenu_AspNetUsersCreated">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersMenu_AspNetUsersModified" Association="WebAppModel.FK_AspNetUsersMenu_AspNetUsersModified">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenus" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsersMenuPermissionControls" EntityType="WebAppModel.AspNetUsersMenuPermissionControl" />
+          <AssociationSet Name="FK_AspNetUsersMenuPermissionControls_Options" Association="WebAppModel.FK_AspNetUsersMenuPermissionControls_Options">
+            <End Role="Option" EntitySet="Options" />
+            <End Role="AspNetUsersMenuPermissionControl" EntitySet="AspNetUsersMenuPermissionControls" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsersProfiles" EntityType="WebAppModel.AspNetUsersProfile" />
+          <AssociationSet Name="FK_AspNetUsersProfile_AspNetUsers" Association="WebAppModel.FK_AspNetUsersProfile_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersProfile" EntitySet="AspNetUsersProfiles" />
+          </AssociationSet>
+          <EntitySet Name="ChangeLogs" EntityType="WebAppModel.ChangeLog" />
+          <AssociationSet Name="FK_ChangeLog_AspNetUsers" Association="WebAppModel.FK_ChangeLog_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="ChangeLog" EntitySet="ChangeLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChangeLog_AspNetUsersMenu" Association="WebAppModel.FK_ChangeLog_AspNetUsersMenu">
+            <End Role="AspNetUsersMenu" EntitySet="AspNetUsersMenus" />
+            <End Role="ChangeLog" EntitySet="ChangeLogs" />
+          </AssociationSet>
+          <EntitySet Name="EmailTemplates" EntityType="WebAppModel.EmailTemplate" />
+          <AssociationSet Name="FK_EmailTemplate_AspNetUsersCreated" Association="WebAppModel.FK_EmailTemplate_AspNetUsersCreated">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="EmailTemplate" EntitySet="EmailTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailTemplate_AspNetUsersModified" Association="WebAppModel.FK_EmailTemplate_AspNetUsersModified">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="EmailTemplate" EntitySet="EmailTemplates" />
+          </AssociationSet>
+          <FunctionImport Name="spPermissionControls">
+            <Parameter Name="RoleID" Mode="In" Type="String" />
+            <Parameter Name="nvPageUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="SendingLogs" EntityType="WebAppModel.SendingLog" />
+          <EntitySet Name="Restaurants" EntityType="WebAppModel.Restaurant" />
+          <EntitySet Name="Recipients" EntityType="WebAppModel.Recipient" />
+          <EntitySet Name="VW_VoucherStatus" EntityType="WebAppModel.VW_VoucherStatus" />
+          <EntitySet Name="Properties" EntityType="WebAppModel.Property" />
+          <EntitySet Name="Templates" EntityType="WebAppModel.Template" />
+          <EntitySet Name="TemplateConditions" EntityType="WebAppModel.TemplateCondition" />
+          <AssociationSet Name="FK_Template_Property" Association="WebAppModel.FK_Template_Property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="Template" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateCondition_Template" Association="WebAppModel.FK_TemplateCondition_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="TemplateCondition" EntitySet="TemplateConditions" />
+          </AssociationSet>
+          <EntitySet Name="Vouchers" EntityType="WebAppModel.Voucher" />
+          <AssociationSet Name="FK_Voucher_TemplateCondition" Association="WebAppModel.FK_Voucher_TemplateCondition">
+            <End Role="TemplateCondition" EntitySet="TemplateConditions" />
+            <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
+          <EntitySet Name="Merchants" EntityType="WebAppModel.Merchant" />
+          <AssociationSet Name="FK_Merchant_Property" Association="WebAppModel.FK_Merchant_Property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="Merchant" EntitySet="Merchants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Merchant" Association="WebAppModel.FK_Voucher_Merchant">
+            <End Role="Merchant" EntitySet="Merchants" />
+            <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="AspNetUsersMenu">
+          <Key>
+            <PropertyRef Name="vMenuID" />
+          </Key>
+          <Property Name="vMenuID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="nvMenuName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="iSerialNo" Type="Int32" Nullable="false" />
+          <Property Name="nvFabIcon" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vParentMenuID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="nvPageUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrefixCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUsersMenu1" Relationship="WebAppModel.FK_AspNetUsersMenu_AspNetUsersMenu" FromRole="AspNetUsersMenu" ToRole="AspNetUsersMenu1" />
+          <NavigationProperty Name="AspNetUsersMenu2" Relationship="WebAppModel.FK_AspNetUsersMenu_AspNetUsersMenu" FromRole="AspNetUsersMenu1" ToRole="AspNetUsersMenu" />
+          <NavigationProperty Name="AspNetUsersMenuPermissions" Relationship="WebAppModel.FK_AspNetUsersMenuPermission_AspNetUsersMenu" FromRole="AspNetUsersMenu" ToRole="AspNetUsersMenuPermission" />
+          <NavigationProperty Name="AspNetUsersMenuControls" Relationship="WebAppModel.FK_AspNetUsersMenuControls_AspNetUsersMenu" FromRole="AspNetUsersMenu" ToRole="AspNetUsersMenuControl" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebAppModel.FK_AspNetUsersMenu_AspNetUsersCreated" FromRole="AspNetUsersMenu" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="WebAppModel.FK_AspNetUsersMenu_AspNetUsersModified" FromRole="AspNetUsersMenu" ToRole="AspNetUser" />
+          <NavigationProperty Name="ChangeLogs" Relationship="WebAppModel.FK_ChangeLog_AspNetUsersMenu" FromRole="AspNetUsersMenu" ToRole="ChangeLog" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersMenu_AspNetUsersMenu">
+          <End Type="WebAppModel.AspNetUsersMenu" Role="AspNetUsersMenu" Multiplicity="0..1" />
+          <End Type="WebAppModel.AspNetUsersMenu" Role="AspNetUsersMenu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenu1">
+              <PropertyRef Name="vParentMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenuPermission_AspNetUsersMenu">
+          <End Type="WebAppModel.AspNetUsersMenu" Role="AspNetUsersMenu" Multiplicity="1" />
+          <End Type="WebAppModel.AspNetUsersMenuPermission" Role="AspNetUsersMenuPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuPermission">
+              <PropertyRef Name="vMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Option">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OptionGroup" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebAppModel.FK_Options_AspNetUsersCreated" FromRole="Option" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="WebAppModel.FK_Options_AspNetUsersModified" FromRole="Option" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsersMenuControls" Relationship="WebAppModel.FK_AspNetUsersMenuControls_Options" FromRole="Option" ToRole="AspNetUsersMenuControl" />
+          <NavigationProperty Name="AspNetUsersMenuPermissionControls" Relationship="WebAppModel.FK_AspNetUsersMenuPermissionControls_Options" FromRole="Option" ToRole="AspNetUsersMenuPermissionControl" />
+          </EntityType>
+        <Association Name="FK_Options_AspNetUsersCreated">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.Option" Role="Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Options_AspNetUsersModified">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.Option" Role="Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="ModifiedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUsersMenuControl">
+          <Key>
+            <PropertyRef Name="vMenuControlID" />
+          </Key>
+          <Property Name="vMenuControlID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="vMenuID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OptionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsersMenu" Relationship="WebAppModel.FK_AspNetUsersMenuControls_AspNetUsersMenu" FromRole="AspNetUsersMenuControl" ToRole="AspNetUsersMenu" />
+          <NavigationProperty Name="Option" Relationship="WebAppModel.FK_AspNetUsersMenuControls_Options" FromRole="AspNetUsersMenuControl" ToRole="Option" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersMenuControls_AspNetUsersMenu">
+          <End Type="WebAppModel.AspNetUsersMenu" Role="AspNetUsersMenu" Multiplicity="1" />
+          <End Type="WebAppModel.AspNetUsersMenuControl" Role="AspNetUsersMenuControl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuControl">
+              <PropertyRef Name="vMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenuControls_Options">
+          <End Type="WebAppModel.Option" Role="Option" Multiplicity="1" />
+          <End Type="WebAppModel.AspNetUsersMenuControl" Role="AspNetUsersMenuControl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Option">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuControl">
+              <PropertyRef Name="OptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenu_AspNetUsersCreated">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.AspNetUsersMenu" Role="AspNetUsersMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenu">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersMenu_AspNetUsersModified">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.AspNetUsersMenu" Role="AspNetUsersMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenu">
+              <PropertyRef Name="ModifiedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUsersMenuPermissionControl">
+          <Key>
+            <PropertyRef Name="vPermissionControlID" />
+          </Key>
+          <Property Name="vPermissionControlID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="vMenuPermissionID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="vRoleID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OptionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="WebAppModel.FK_AspNetUsersMenuPermissionControls_Options" FromRole="AspNetUsersMenuPermissionControl" ToRole="Option" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersMenuPermissionControls_Options">
+          <End Type="WebAppModel.Option" Role="Option" Multiplicity="1" />
+          <End Type="WebAppModel.AspNetUsersMenuPermissionControl" Role="AspNetUsersMenuPermissionControl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Option">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersMenuPermissionControl">
+              <PropertyRef Name="OptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUsersProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="vFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vMiddleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vPhoto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vPosition" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vRank" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vDepartment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebAppModel.FK_AspNetUsersProfile_AspNetUsers" FromRole="AspNetUsersProfile" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersProfile_AspNetUsers">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.AspNetUsersProfile" Role="AspNetUsersProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersProfile">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vMenuID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EventType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ObjectType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebAppModel.FK_ChangeLog_AspNetUsers" FromRole="ChangeLog" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsersMenu" Relationship="WebAppModel.FK_ChangeLog_AspNetUsersMenu" FromRole="ChangeLog" ToRole="AspNetUsersMenu" />
+          <Property Name="ContentDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_ChangeLog_AspNetUsers">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.ChangeLog" Role="ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChangeLog_AspNetUsersMenu">
+          <End Type="WebAppModel.AspNetUsersMenu" Role="AspNetUsersMenu" Multiplicity="1" />
+          <End Type="WebAppModel.ChangeLog" Role="ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsersMenu">
+              <PropertyRef Name="vMenuID" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="vMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmailSubject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="EmailBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebAppModel.FK_EmailTemplate_AspNetUsersCreated" FromRole="EmailTemplate" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="WebAppModel.FK_EmailTemplate_AspNetUsersModified" FromRole="EmailTemplate" ToRole="AspNetUser" />
+          </EntityType>
+        <Association Name="FK_EmailTemplate_AspNetUsersCreated">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.EmailTemplate" Role="EmailTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailTemplate">
+              <PropertyRef Name="CreatedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailTemplate_AspNetUsersModified">
+          <End Type="WebAppModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebAppModel.EmailTemplate" Role="EmailTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailTemplate">
+              <PropertyRef Name="ModifiedByPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SendingLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoucherId" Type="Int32" Nullable="false" />
+          <Property Name="HashCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniqueID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProcessDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsEmailSent" Type="Boolean" Nullable="false" />
+          <Property Name="EmailDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmailSentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmailResentDate" Type="DateTime" Precision="3" />
+          <Property Name="EmailSentTo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmailErrorLog" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VW_VoucherStatus">
+          <Key>
+            <PropertyRef Name="UniqueID" />
+            <PropertyRef Name="EventName" />
+            <PropertyRef Name="Recipient" />
+            <PropertyRef Name="VoucherCode" />
+            <PropertyRef Name="Amount" />
+          </Key>
+          <Property Name="TemplateID" Type="Int32" />
+          <Property Name="TemplateName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UniqueID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Recipient" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VoucherStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProcessDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyLocation" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MerchantName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MerchantEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyImage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Templates" Relationship="WebAppModel.FK_Template_Property" FromRole="Property" ToRole="Template" />
+          <NavigationProperty Name="Merchants" Relationship="WebAppModel.FK_Merchant_Property" FromRole="Property" ToRole="Merchant" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Property" Relationship="WebAppModel.FK_Template_Property" FromRole="Template" ToRole="Property" />
+          <NavigationProperty Name="TemplateConditions" Relationship="WebAppModel.FK_TemplateCondition_Template" FromRole="Template" ToRole="TemplateCondition" />
+        </EntityType>
+        <EntityType Name="TemplateCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Amount2" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Condition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TemplatePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Guidelines" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="IsCustomTemplate" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Template" Relationship="WebAppModel.FK_TemplateCondition_Template" FromRole="TemplateCondition" ToRole="Template" />
+          <NavigationProperty Name="Vouchers" Relationship="WebAppModel.FK_Voucher_TemplateCondition" FromRole="TemplateCondition" ToRole="Voucher" />
+        </EntityType>
+        <Association Name="FK_Template_Property">
+          <End Type="WebAppModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="WebAppModel.Template" Role="Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateCondition_Template">
+          <End Type="WebAppModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="WebAppModel.TemplateCondition" Role="TemplateCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateCondition">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TempCondID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UniqueID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Recipient" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UrlLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WithDiscrepancy" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GenerationID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MerchantID" Type="Int32" />
+          <Property Name="ClaimedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TemplateCondition" Relationship="WebAppModel.FK_Voucher_TemplateCondition" FromRole="Voucher" ToRole="TemplateCondition" />
+          <NavigationProperty Name="Merchant" Relationship="WebAppModel.FK_Voucher_Merchant" FromRole="Voucher" ToRole="Merchant" />
+        </EntityType>
+        <Association Name="FK_Voucher_TemplateCondition">
+          <End Type="WebAppModel.TemplateCondition" Role="TemplateCondition" Multiplicity="0..1" />
+          <End Type="WebAppModel.Voucher" Role="Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateCondition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="TempCondID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Merchant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MerchantImage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Section" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByPK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Property" Relationship="WebAppModel.FK_Merchant_Property" FromRole="Merchant" ToRole="Property" />
+          <NavigationProperty Name="Vouchers" Relationship="WebAppModel.FK_Voucher_Merchant" FromRole="Merchant" ToRole="Voucher" />
+        </EntityType>
+        <Association Name="FK_Merchant_Property">
+          <End Type="WebAppModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="WebAppModel.Merchant" Role="Merchant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Merchant">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Merchant">
+          <End Type="WebAppModel.Merchant" Role="Merchant" Multiplicity="0..1" />
+          <End Type="WebAppModel.Voucher" Role="Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="MerchantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="superadminModelStoreContainer" CdmEntityContainer="WebAppEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="WebAppModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IndexPage" ColumnName="IndexPage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUserRole">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="vAspNetUserRolesID" ColumnName="vAspNetUserRolesID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="ResetPassword" ColumnName="ResetPassword" />
+                <ScalarProperty Name="BlockedAccount" ColumnName="BlockedAccount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersLoginHistories">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUsersLoginHistory">
+              <MappingFragment StoreEntitySet="AspNetUsersLoginHistory">
+                <ScalarProperty Name="vULHID" ColumnName="vULHID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="dLogIn" ColumnName="dLogIn" />
+                <ScalarProperty Name="dLogOut" ColumnName="dLogOut" />
+                <ScalarProperty Name="nvIPAddress" ColumnName="nvIPAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersMenuPermissions">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUsersMenuPermission">
+              <MappingFragment StoreEntitySet="AspNetUsersMenuPermission">
+                <ScalarProperty Name="wFetch" ColumnName="wFetch" />
+                <ScalarProperty Name="wSnyc" ColumnName="wSnyc" />
+                <ScalarProperty Name="wUpload" ColumnName="wUpload" />
+                <ScalarProperty Name="wDownload" ColumnName="wDownload" />
+                <ScalarProperty Name="wPrint" ColumnName="wPrint" />
+                <ScalarProperty Name="wExtract" ColumnName="wExtract" />
+                <ScalarProperty Name="wDelete" ColumnName="wDelete" />
+                <ScalarProperty Name="wAdd" ColumnName="wAdd" />
+                <ScalarProperty Name="wView" ColumnName="wView" />
+                <ScalarProperty Name="wEdit" ColumnName="wEdit" />
+                <ScalarProperty Name="vMenuPermissionID" ColumnName="vMenuPermissionID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="vMenuID" ColumnName="vMenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersPageVisiteds">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUsersPageVisited">
+              <MappingFragment StoreEntitySet="AspNetUsersPageVisited">
+                <ScalarProperty Name="vPageVisitedID" ColumnName="vPageVisitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="dDateVisited" ColumnName="dDateVisited" />
+                <ScalarProperty Name="nvPageName" ColumnName="nvPageName" />
+                <ScalarProperty Name="nvIPAddress" ColumnName="nvIPAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="WebAppModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="vSettingLabel" ColumnName="vSettingLabel" />
+                <ScalarProperty Name="vSettingGroup" ColumnName="vSettingGroup" />
+                <ScalarProperty Name="vSettingID" ColumnName="vSettingID" />
+                <ScalarProperty Name="vSettingName" ColumnName="vSettingName" />
+                <ScalarProperty Name="vSettingOption" ColumnName="vSettingOption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersMenus">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUsersMenu">
+              <MappingFragment StoreEntitySet="AspNetUsersMenu">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="PrefixCode" ColumnName="PrefixCode" />
+                <ScalarProperty Name="nvPageUrl" ColumnName="nvPageUrl" />
+                <ScalarProperty Name="vParentMenuID" ColumnName="vParentMenuID" />
+                <ScalarProperty Name="nvFabIcon" ColumnName="nvFabIcon" />
+                <ScalarProperty Name="iSerialNo" ColumnName="iSerialNo" />
+                <ScalarProperty Name="nvMenuName" ColumnName="nvMenuName" />
+                <ScalarProperty Name="vMenuID" ColumnName="vMenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Options">
+            <EntityTypeMapping TypeName="WebAppModel.Option">
+              <MappingFragment StoreEntitySet="Options">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="OptionGroup" ColumnName="OptionGroup" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersMenuControls">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUsersMenuControl">
+              <MappingFragment StoreEntitySet="AspNetUsersMenuControls">
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="vMenuID" ColumnName="vMenuID" />
+                <ScalarProperty Name="vMenuControlID" ColumnName="vMenuControlID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersMenuPermissionControls">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUsersMenuPermissionControl">
+              <MappingFragment StoreEntitySet="AspNetUsersMenuPermissionControls">
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="vRoleID" ColumnName="vRoleID" />
+                <ScalarProperty Name="vMenuPermissionID" ColumnName="vMenuPermissionID" />
+                <ScalarProperty Name="vPermissionControlID" ColumnName="vPermissionControlID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersProfiles">
+            <EntityTypeMapping TypeName="WebAppModel.AspNetUsersProfile">
+              <MappingFragment StoreEntitySet="AspNetUsersProfile">
+                <ScalarProperty Name="vDepartment" ColumnName="vDepartment" />
+                <ScalarProperty Name="vRank" ColumnName="vRank" />
+                <ScalarProperty Name="vPosition" ColumnName="vPosition" />
+                <ScalarProperty Name="vCompany" ColumnName="vCompany" />
+                <ScalarProperty Name="vPhoto" ColumnName="vPhoto" />
+                <ScalarProperty Name="vMiddleName" ColumnName="vMiddleName" />
+                <ScalarProperty Name="vLastName" ColumnName="vLastName" />
+                <ScalarProperty Name="vFirstName" ColumnName="vFirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangeLogs">
+            <EntityTypeMapping TypeName="WebAppModel.ChangeLog">
+              <MappingFragment StoreEntitySet="ChangeLog">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="ContentDetail" ColumnName="ContentDetail" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="vMenuID" ColumnName="vMenuID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailTemplates">
+            <EntityTypeMapping TypeName="WebAppModel.EmailTemplate">
+              <MappingFragment StoreEntitySet="EmailTemplate">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="EmailBody" ColumnName="EmailBody" />
+                <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spPermissionControls" FunctionName="superadminModel.Store.spPermissionControls" />
+          <EntitySetMapping Name="SendingLogs">
+            <EntityTypeMapping TypeName="WebAppModel.SendingLog">
+              <MappingFragment StoreEntitySet="SendingLog">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="HashCode" ColumnName="HashCode" />
+                <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="WebAppModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recipients">
+            <EntityTypeMapping TypeName="WebAppModel.Recipient">
+              <MappingFragment StoreEntitySet="Recipient">
+                <ScalarProperty Name="EmailErrorLog" ColumnName="EmailErrorLog" />
+                <ScalarProperty Name="EmailSentTo" ColumnName="EmailSentTo" />
+                <ScalarProperty Name="EmailResentDate" ColumnName="EmailResentDate" />
+                <ScalarProperty Name="EmailSentDate" ColumnName="EmailSentDate" />
+                <ScalarProperty Name="EmailDetail" ColumnName="EmailDetail" />
+                <ScalarProperty Name="IsEmailSent" ColumnName="IsEmailSent" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_VoucherStatus">
+            <EntityTypeMapping TypeName="WebAppModel.VW_VoucherStatus">
+              <MappingFragment StoreEntitySet="VW_VoucherStatus">
+                <ScalarProperty Name="MerchantEmail" ColumnName="MerchantEmail" />
+                <ScalarProperty Name="MerchantName" ColumnName="MerchantName" />
+                <ScalarProperty Name="PropertyEmail" ColumnName="PropertyEmail" />
+                <ScalarProperty Name="PropertyLocation" ColumnName="PropertyLocation" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+                <ScalarProperty Name="ClaimedDate" ColumnName="ClaimedDate" />
+                <ScalarProperty Name="VoucherStatus" ColumnName="VoucherStatus" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+                <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="WebAppModel.Property">
+              <MappingFragment StoreEntitySet="Property">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="PropertyImage" ColumnName="PropertyImage" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="WebAppModel.Template">
+              <MappingFragment StoreEntitySet="Template">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateConditions">
+            <EntityTypeMapping TypeName="WebAppModel.TemplateCondition">
+              <MappingFragment StoreEntitySet="TemplateCondition">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsCustomTemplate" ColumnName="IsCustomTemplate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="VoucherBase64" ColumnName="VoucherBase64" />
+                <ScalarProperty Name="Guidelines" ColumnName="Guidelines" />
+                <ScalarProperty Name="TemplatePath" ColumnName="TemplatePath" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Amount2" ColumnName="Amount2" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vouchers">
+            <EntityTypeMapping TypeName="WebAppModel.Voucher">
+              <MappingFragment StoreEntitySet="Voucher">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ClaimedDate" ColumnName="ClaimedDate" />
+                <ScalarProperty Name="MerchantID" ColumnName="MerchantID" />
+                <ScalarProperty Name="GenerationID" ColumnName="GenerationID" />
+                <ScalarProperty Name="VoucherStatus" ColumnName="VoucherStatus" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WithDiscrepancy" ColumnName="WithDiscrepancy" />
+                <ScalarProperty Name="VoucherBase64" ColumnName="VoucherBase64" />
+                <ScalarProperty Name="UrlLink" ColumnName="UrlLink" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="TempCondID" ColumnName="TempCondID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merchants">
+            <EntityTypeMapping TypeName="WebAppModel.Merchant">
+              <MappingFragment StoreEntitySet="Merchant">
+                <ScalarProperty Name="ModifiedByPK" ColumnName="ModifiedByPK" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedByPK" ColumnName="CreatedByPK" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="MerchantImage" ColumnName="MerchantImage" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

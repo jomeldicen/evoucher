@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="cRedeemed">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.PageTitle - @ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+    <meta name="keywords" content="@ViewBag.MetaKeyword">
+    <meta name="author" content="@ViewBag.SiteAuthor">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/main.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        .input-group .invalid-feedback {
+            display: none;
+        }
+
+        .input-group.has-error .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+<body ng-init="GetMerchant('@ViewBag.UniqueID')" ng-cloak>
+    <!-- Full Page Image Header with Vertically Centered Content -->
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center"></div>
+        </div>
+    </header>
+    <!-- Page Content -->
+    <section class="py-5">
+        <div class="container h-100">
+            <div class="row mb-2 d-flex justify-content-center" ng-if="Merchants.length && !isDone">
+                <div id="small-img" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card card-primary card-outline">
+                        <div class="card-body">
+                            <p class="mb-4 text-center lead font-weight-bold">Select the store where you want to use the voucher</p>
+                            <div class="text-center merch">
+                                <a href="javascript:void(0)" ng-repeat="mer in Merchants" class="btn btn-sm" ng-click="GetVoucherData('@ViewBag.UniqueID', mer)">
+                                    <img ng-src="{{mer.MerchantImage}}" class="img-fluid img-thumbnail btn-outline-secondary" alt="{{mer.Name}}" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2 d-flex justify-content-center" ng-if="!Merchants.length || isDone">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+                    <div class="card card-primary card-outline">
+                        <div class="card-body register-card-body">
+                            <img ng-src="{{messageicon}}" class="mx-auto d-block mt-3" />
+                            <div ng-show="(messagecode === 200)" class="text-center">
+                                <h4 class="text-center mb-3 mt-4">Thank you for validating your voucher. <br /> Please take a screenshot or download this notification.</h4>
+                                <p class="text-center">We have verified voucher for {{data.Recipient}} with voucher no. {{data.VoucherCode}} amounting to {{data.Amount | currency : 'Php ' }}. <br />Please present a copy of this validation upon visit at {{(data.PropertyName === merchant.MerchantName)? data.PropertyName : data.PropertyName + ' - ' +  merchant.MerchantName }}.</p>
+                                <a href="../../report/ConfirmationVoucher/{{data.UniqueID}}" class="btn btn-info btn-sm text-center mt-3">Download Notification</a>
+                            </div>
+
+                            <div ng-show="(messagecode === 404)">
+                                <h4 class="text-center mb-3 mt-4">Sorry but your code could not be redeemed</h4>
+                                <p class="text-center">If you're having issues redeeming your voucher, it might be due to one of the following reasons: </p>
+                                <ul>
+                                    <li>The voucher code might have been applied already</li>
+                                    <li>You might have made a spelling mistake when entering the code or voucher code doesn't exists</li>
+                                </ul>
+
+                                @*<p>If you still need assistance, please contact our Support Team via support@blinkist.com and they'll be happy to look into it.</p>*@
+                            </div>
+                            <!-- /.social-auth-links -->
+                        </div>
+                        <!-- /.login-card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="front-footer">
+        <strong>Copyright © 2020-@ViewBag.CurrentYear <a href="https://federalland.ph/" target="_blank">Federal Land, Inc</a>.</strong> All rights reserved.
+    </footer>
+    <!-- Footer-->  
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/dist/js/adminlte.min.js"></script>
+
+    <script src="~/Scripts/AngularJS/1.8.0/angular.min.js"></script>
+    <script src="~/Scripts/AngularJS/1.8.0/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/AngularJS/1.8.0/angular-messages.min.js"></script>
+    <script src="~/Scripts/jquery.backstretch.min.js"></script>
+    <script src="~/Scripts/ui-bootstrap-tpls-3.0.2.min.js"></script>
+    <script src="~/Scripts/ProjectScriptFile/sweetalert.min.js"></script>
+    <script src="~/Scripts/ProjectScriptFile/AppLogin.js"></script>
+    <script src="~/Scripts/ProjectScriptFile/Redeemed.js"></script>
+
+
+</body>
+</html>
+

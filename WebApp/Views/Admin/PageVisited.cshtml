@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Page Visited";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="cPageVisited" ng-init="init('@ViewBag.PageUrl')">
+    <section class="content" ng-init="GetPageVisitedBasicData()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="far fa-eye"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Visit</span>
+                            <span class="info-box-number" ng-bind="TotalVisit"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="far fa-file-alt"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Highest Visited Page</span>
+                            <span class="info-box-number" ng-bind="HighestVisitedPage"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="far fa-user"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Highest Visited By</span>
+                            <span class="info-box-number" ng-bind="HighestVisitedBy"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="fas fa-chart-line"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Today's Total Visit</span>
+                            <span class="info-box-number" ng-bind="TodayTotalVisit"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-gray card-outline">
+                        <div class="card-body">
+                            <table datatable="ng" dt-options="dtOptions" id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sl#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Page Name</th>
+                                        <th>Visit Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="vl in VisitedList">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td ng-bind="vl.Name"></td>
+                                        <td ng-bind="vl.Email"></td>
+                                        <td ng-bind="vl.PageName"></td>
+                                        <td ng-bind="vl.VisitedDate | date : 'medium'"></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Sl#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Page Name</th>
+                                        <th>Visit Time</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+</div>
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/PageVisited.js"></script>
+}

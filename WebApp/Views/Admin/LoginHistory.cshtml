@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Login History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="cLoginHistory" ng-init="init('@ViewBag.PageUrl')">
+    <section class="content" ng-init="GetLoginHistoryBasicData()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-sign-in-alt"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Login</span>
+                            <span class="info-box-number" ng-bind="TotalLogin"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="far fa-user"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Highest Login By</span>
+                            <span class="info-box-number" ng-bind="HighestLoginBy"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="far fa-user"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{HighestLoginBy}} 's Total Login</span>
+                            <span class="info-box-number" ng-bind="HighestLogin"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="fas fa-chart-line"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Today's Total Login</span>
+                            <span class="info-box-number" ng-bind="TodayTotalLogin"></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-gray card-outline">
+                        <div class="card-body">
+                            <table datatable="ng" dt-options="dtOptions" id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sl#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Login</th>
+                                        <th>Logout</th>
+                                        <th>IP Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="ll in LoginList">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td ng-bind="ll.Name"></td>
+                                        <td ng-bind="ll.Email"></td>
+                                        <td ng-bind="ll.Login | date : 'medium'"></td>
+                                        <td ng-bind="ll.Logout | date : 'medium'"></td>
+                                        <td ng-bind="ll.IP"></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Sl#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Login</th>
+                                        <th>Logout</th>
+                                        <th>IP Address</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/LoginHistory.js"></script>
+}

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Pending Email Verification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content" ng-controller="cEmailVerification" ng-init="GetPEVBasicData()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table datatable="ng" dt-options="dtOptions" id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sl#</th>
+                                    <th>Email</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="pl in PEVList">
+                                    <td ng-bind="$index + 1"></td>
+                                    <td ng-bind="pl.Email"></td>
+                                    <td ng-bind="pl.uType"></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Sl#</th>
+                                    <th>Email</th>
+                                    <th>Type</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+</section>
+
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/PendingEmailVerification.js"></script>
+}

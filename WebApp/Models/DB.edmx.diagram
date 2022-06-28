@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0ba3b94c3c504ae7aca1f144d6408840" Name="Diagram1" ZoomLevel="53">
+        <EntityTypeShape EntityType="WebAppModel.C__MigrationHistory" Width="1.5" PointX="13.125" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetRole" Width="2.25" PointX="5.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUserClaim" Width="2.25" PointX="5.125" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUserLogin" Width="2.125" PointX="2.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUserRole" Width="2" PointX="2.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUser" Width="1.875" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUsersLoginHistory" Width="2.25" PointX="5.125" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUsersMenuPermission" Width="2.25" PointX="7.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUsersPageVisited" Width="2.25" PointX="5.125" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppModel.Setting" Width="2.375" PointX="10.125" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenuPermission_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersLoginHistory_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersPageVisited_AspNetUsers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUsersMenu" Width="2.125" PointX="2.75" PointY="3" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenu_AspNetUsersMenu" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenuPermission_AspNetUsersMenu" />
+        <EntityTypeShape EntityType="WebAppModel.Option" Width="2.25" PointX="7.75" PointY="7.125" />
+        <AssociationConnector Association="WebAppModel.FK_Options_AspNetUsersCreated" />
+        <AssociationConnector Association="WebAppModel.FK_Options_AspNetUsersModified" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUsersMenuControl" Width="2.25" PointX="7.75" PointY="4.75" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenuControls_AspNetUsersMenu" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenuControls_Options" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenu_AspNetUsersCreated" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenu_AspNetUsersModified" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUsersMenuPermissionControl" Width="2.25" PointX="7.75" PointY="11" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersMenuPermissionControls_Options" />
+        <EntityTypeShape EntityType="WebAppModel.AspNetUsersProfile" Width="2.125" PointX="2.75" PointY="8" />
+        <AssociationConnector Association="WebAppModel.FK_AspNetUsersProfile_AspNetUsers" />
+        <EntityTypeShape EntityType="WebAppModel.ChangeLog" Width="2.25" PointX="5.125" PointY="13.5" />
+        <AssociationConnector Association="WebAppModel.FK_ChangeLog_AspNetUsers" />
+        <AssociationConnector Association="WebAppModel.FK_ChangeLog_AspNetUsersMenu" />
+        <EntityTypeShape EntityType="WebAppModel.EmailTemplate" Width="2.375" PointX="10.125" PointY="2.625" />
+        <AssociationConnector Association="WebAppModel.FK_EmailTemplate_AspNetUsersCreated" />
+        <AssociationConnector Association="WebAppModel.FK_EmailTemplate_AspNetUsersModified" />
+        <EntityTypeShape EntityType="WebAppModel.SendingLog" Width="1.5" PointX="11.375" PointY="7.75" />
+        <EntityTypeShape EntityType="WebAppModel.Restaurant" Width="1.5" PointX="8.375" PointY="13.75" />
+        <EntityTypeShape EntityType="WebAppModel.Recipient" Width="1.5" PointX="15.125" PointY="5.75" />
+        <EntityTypeShape EntityType="WebAppModel.VW_VoucherStatus" Width="1.5" PointX="0.75" PointY="15.125" />
+        <EntityTypeShape EntityType="WebAppModel.Property" Width="1.5" PointX="13.75" PointY="13.875" />
+        <EntityTypeShape EntityType="WebAppModel.Template" Width="1.5" PointX="16" PointY="14.125" />
+        <EntityTypeShape EntityType="WebAppModel.TemplateCondition" Width="1.5" PointX="18.25" PointY="13.5" />
+        <AssociationConnector Association="WebAppModel.FK_Template_Property" />
+        <AssociationConnector Association="WebAppModel.FK_TemplateCondition_Template" />
+        <EntityTypeShape EntityType="WebAppModel.Voucher" Width="1.5" PointX="20.5" PointY="13.875" />
+        <AssociationConnector Association="WebAppModel.FK_Voucher_TemplateCondition" />
+        <EntityTypeShape EntityType="WebAppModel.Merchant" Width="1.5" PointX="16" PointY="18.75" />
+        <AssociationConnector Association="WebAppModel.FK_Merchant_Property" />
+        <AssociationConnector Association="WebAppModel.FK_Voucher_Merchant" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

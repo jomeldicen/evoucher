@@ -1,0 +1,434 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div ng-controller="User" ng-init="init('@ViewBag.PageUrl')">
+        <section class="content" ng-init="GetUserBasicData()">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header card-gray card-outline">
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-12 col-md-12">
+                                            <button type="button" class="btn btn-info btn-sm float-right mr-1" data-toggle="modal" data-target="#createUserModal" ng-if="Ctrl.wAdd" ng-click="clearData()">
+                                                <i class="fas fa-plus-circle"></i> Create
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length form-inline">
+                                                <label>
+                                                    Show
+                                                    <select name="example1_length" class="form-control form-control-sm" ng-model="pagingInfo.itemsPerPage" ng-change="setItemsPerPage(pagingInfo.itemsPerPage)">
+                                                        <option value="5">5</option>
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select> entries
+                                                </label>
+                                                <img src="~/Content/dist/img/ajax-loader2.gif" ng-show="loading" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <form ng-submit="search()" role="form">
+                                                <div class="form-inline dataTables_filter">
+                                                    <label>
+                                                        Search:
+                                                        <input type="search" class="form-control form-control-sm" placeholder="" ng-model="pagingInfo.search">
+                                                    </label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting" width="4%" ng-click="sort('Id')">Nos</th>
+                                                        <th class="sorting" ng-click="sort('FullName')">Name</th>
+                                                        <th class="sorting" ng-click="sort('RoleName')">Role Name</th>
+                                                        <th class="sorting" ng-click="sort('Email')">Email</th>
+                                                        <th class="sorting" ng-click="sort('Position')">Position</th>
+                                                        <th class="sorting" ng-click="sort('Department')">Department</th>
+                                                        <th class="sorting" ng-click="sort('Published')">Status</th>
+                                                        <th class="text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-if="pagingInfo.totalItems == 0">
+                                                        <td colspan="8"><center>No data to display</center></td>
+                                                    </tr>
+                                                    <tr ng-if="pagingInfo.totalItems > 0" ng-repeat="ur in User">
+                                                        <td ng-bind="(pagingInfo.itemsPerPage * (pagingInfo.page - 1)) + $index + 1"></td>
+                                                        <td>
+                                                            <img ng-if="ur.Photo != null" ng-src="{{ur.Photo}}" width="30" height="30" class="img-circle elevation-2" alt="User Image" />
+                                                            <img ng-if="ur.Photo == null" src="/Content/ProjectFile/img/avatar5.png" width="30" height="30" class="img-circle elevation-2" alt="User Image">
+
+                                                            <span class="pl-2" ng-bind="ur.FullName"></span>
+                                                        </td>
+                                                        <td ng-bind="ur.RoleName"></td>
+                                                        <td ng-bind="ur.Email"></td>
+                                                        <td ng-bind="ur.Position"></td>
+                                                        <td ng-bind="ur.Department"></td>
+                                                        <td class="text-center"><span ng-class="(ur.Status === 'True')? 'badge badge-success' : 'badge badge-danger'" ng-bind="(ur.Status === 'True')? 'Active' : 'Inactive'"></span></td>
+                                                        <td class="text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">
+                                                            <button type="button" class="btn btn-secondary btn-circle btn-sm" data-toggle="modal" data-target="#updateUserPass" ng-if="Ctrl.wEdit" ng-click="EditPassData(ur)"><i class="fas fa-key"></i></button>
+                                                            <button type="button" class="btn btn-secondary btn-circle btn-sm" data-toggle="modal" data-target="#updateUserModal" ng-if="Ctrl.wEdit" ng-click="EditUserData(ur)"><i class="fas fa-edit"></i></button>
+                                                            <button type="button" class="btn btn-danger btn-circle btn-sm" ng-if="Ctrl.wDelete" ng-click="DeleteUser(ur)"><i class="fas fa-trash-alt"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{pagingInfo.page}} to {{pagingInfo.totalItems/pagingInfo.itemsPerPage | roundup }} of {{pagingInfo.totalItems}} entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                                <ul uib-pagination total-items="(10 * pagingInfo.totalItems)/pagingInfo.itemsPerPage" ng-model="pagingInfo.page" ng-change="selectPage(pagingInfo.page)" max-size="10" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </section>
+
+        <div class="modal fade" id="createUserModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form name="userForm" novalidate role="form">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 row form-group has-feedback" show-errors>
+                                    <div class="col-3">
+                                        <div style="height:102px; width:102px; border:1px solid gray">
+                                            <img ng-if="data.Photo" style="height:100px; width:100px;" src="{{data.Photo}}" alt="...">
+                                            <img ng-if="!data.Photo" style="height:100px; width:100px;" src="/Content/ProjectFile/img/avatar5.png" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 pt-3">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input class="form-control form-control-sm custom-file-input" name="Photo" type="file" fileread="data.Photo" ng-required="true">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2 pt-3">
+                                        <button class="form-control btn-danger" ng-click="DeletePicture(data)">Delete Picture</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="FirstName">First Name <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="First Name" id="FirstName" name="FirstName" ng-model="data.FirstName" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.FirstName.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="LastName">Last Name <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastName" name="LastName" ng-model="data.LastName" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.LastName.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Role">Role <small>*</small></label>
+                                    <select class="form-control form-control-sm" id="Role" name="Role" ng-model="data.RoleId" ng-required="true">
+                                        <option value="">Select Please ...</option>
+                                        <option ng-repeat="rl in Role" value="{{rl.Id}}">{{rl.Name}}</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Role.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Status">Status <small>*</small></label>
+                                    <select class="form-control form-control-sm" id="Status" name="Status" ng-model="data.Status" ng-required="true">
+                                        <option value="">Select Please ...</option>
+                                        <option value="True">Active</option>
+                                        <option value="False">Inactive</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Gender.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Position">Position <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Position" id="Position" name="Position" ng-model="data.Position" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Position.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Rank">Rank <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Rank" id="Rank" name="Rank" ng-model="data.Rank" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Rank.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Department">Department <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Department" id="Department" name="Department" ng-model="data.Department" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Department.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Company">Company <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Company" id="Company" name="Company" ng-model="data.Company" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Company.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="PhoneNumber">Phone Number <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Phone Number" id="PhoneNumber" name="PhoneNumber" ng-model="data.PhoneNumber" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.PhoneNumber.$error.required">You can't leave this empty.</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="email">Email <small>*</small></label>
+                                    <input type="email" class="form-control form-control-sm" placeholder="Email" id="Email" name="Email" ng-model="data.Email" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Email.$error.required">You can't leave this empty.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Email.$error">A valid email is required.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Password">Password <small>*</small></label>
+                                    <input type="password" class="form-control form-control-sm" id="Password" name="Password"  placeholder="Password" ng-model="data.Password" data-provide="pwstrength" ng-required="true" ng-minlength="6" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Password.$error.required">You can't leave this empty.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Password.$error.minlength">Use at least 6 characters.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.Password.$error.pattern">Minimum one uppercase, lowercase and integer required.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="ConfirmPassword">Confirm Password <small>*</small></label>
+                                    <input type="password" class="form-control form-control-sm" placeholder="Retype password" ng-model="data.ConfirmPassword" id="ConfirmPassword" name="ConfirmPassword" ng-required="true" ng-pattern="data.Password">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.ConfirmPassword.$error.required">You can't leave this empty.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userForm.ConfirmPassword.$error.pattern">These passwords don't match. Try again?</div>
+                                </div>
+
+                                <div class="col-4" ng-hide="true">
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="EmailVerificationDisabled" name="EmailVerificationDisabled" ng-model="data.EmailVerificationDisabled">
+                                        <label for="EmailVerificationDisabled">
+                                            Confirm registration without email verification.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="ClearData()">Close</button>
+                            <button type="submit" class="btn btn-secondary btn-sm" ng-click="SaveUser(data)">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="updateUserModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form name="userUpdateForm" novalidate role="form">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 row form-group has-feedback" show-errors>
+                                    <div class="col-3">
+                                        <div style="height:102px; width:102px; border:1px solid gray">
+                                            <img ng-if="data.Photo" style="height:100px; width:100px;" src="{{data.Photo}}" alt="...">
+                                            <img ng-if="!data.Photo" style="height:100px; width:100px;" src="/Content/ProjectFile/img/avatar5.png" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 pt-3">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input class="form-control form-control-sm custom-file-input" type="file" fileread="data.Photo" ng-required="true">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2 pt-3">
+                                        <button class="form-control btn-danger" ng-click="DeletePicture(data)">Delete Picture</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="FirstName">First Name</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="First Name" id="FirstName1" name="FirstName1" ng-model="data.FirstName" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.FirstName1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="LastName">Last Name</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastName1" name="LastName1" ng-model="data.LastName" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.LastName1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Role">Role</label>
+                                    <select class="form-control form-control-sm" id="Role1" name="Role1" ng-model="data.RoleId" ng-required="true">
+                                        <option value="">Select Please ...</option>
+                                        <option ng-repeat="rl in Role" ng-selected="data.RoleId == rl.Id" value="{{rl.Id}}">{{rl.Name}}</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.Role1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Status">Status</label>
+                                    <select class="form-control form-control-sm" id="Status1" name="Status1" ng-model="data.Status" ng-required="true">
+                                        <option value="">Select Please ...</option>
+                                        <option value="True">Active</option>
+                                        <option value="False">Inactive</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.Status1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Position1">Position <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Position" id="Position1" name="Position1" ng-model="data.Position" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.Position1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Rank1">Rank <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Rank" id="Rank1" name="Rank1" ng-model="data.Rank" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.Rank1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Department1">Department <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Department" id="Department1" name="Department1" ng-model="data.Department" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.Department1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="Company1">Company <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Company" id="Company1" name="Company1" ng-model="data.Company" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.Company1.$error.required">You can't leave this empty.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="PhoneNumber">Phone Number <small>*</small></label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Phone Number" id="PhoneNumber1" name="PhoneNumber1" ng-model="data.PhoneNumber" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.PhoneNumber1.$error.required">You can't leave this empty.</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control form-control-sm" placeholder="Email" id="email1" name="email1" ng-model="data.Email" ng-required="true">
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.email1.$error.required">You can't leave this empty.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.email1.$error">A valid email is required.</div>
+                                </div>
+
+                                <div class="col-4 form-group has-feedback" show-errors>
+                                    <label for="BlockedAccount">Blocked Account <small>*</small></label>
+                                    <select class="form-control form-control-sm" id="BlockedAccount1" name="BlockedAccount1" ng-model="data.BlockedAccount" ng-required="true">
+                                        <option value="">Select Please ...</option>
+                                        <option value="True">Yes</option>
+                                        <option value="False">No</option>
+                                    </select>
+                                    <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.BlockedAccoun1.$error.required">You can't leave this empty.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="ClearData()">Close</button>
+                            <button type="submit" class="btn btn-secondary btn-sm" ng-click="UpdateUser(data)">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="modal fade" id="updateUserPass">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Change Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form name="newForm" novalidate role="form">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group col-12 has-feedback" show-errors>
+                                    <label for="NewPassword">New Password <small>*</small></label>
+                                    <input type="password" class="form-control form-control-sm" id="NewPassword" name="NewPassword" ng-model="data.NewPassword" data-provide="pwstrength" ng-required="true" ng-minlength="6" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/" placeholder="Password">
+                                    <div style="color:red" class="invalid-feedback" ng-if="newForm.NewPassword.$error.required">You can't leave this empty.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="newForm.NewPassword.$error.minlength">Use at least 6 characters.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="newForm.NewPassword.$error.pattern">Minimum one uppercase, lowercase and integer required.</div>
+
+                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                </div>
+                                <div class="form-group col-12 has-feedback" show-errors>
+                                    <label for="ConfirmPassword2">Retype password <small>*</small></label>
+                                    <input type="password" class="form-control form-control-sm" id="ConfirmPassword2" name="ConfirmPassword2" ng-model="data.ConfirmPassword" ng-required="true" ng-pattern="data.NewPassword" placeholder="Retype password" >
+                                    <div style="color:red" class="invalid-feedback" ng-if="newForm.ConfirmPassword2.$error.required">You can't leave this empty.</div>
+                                    <div style="color:red" class="invalid-feedback" ng-if="newForm.ConfirmPassword2.$error.pattern">These passwords don't match. Try again?</div>
+
+                                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="ClearData()">Close</button>
+                            <button type="submit" class="btn btn-secondary btn-sm" ng-click="ResetPassword(data)">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/User.js"></script>
+}

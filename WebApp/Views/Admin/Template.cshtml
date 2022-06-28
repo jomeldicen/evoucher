@@ -1,0 +1,173 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="Template" ng-init="init('@ViewBag.PageUrl')">
+    <section class="content" ng-init="GetTemplateData()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-9">
+                    <div class="card">
+                        <div class="card-header card-gray card-outline">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12 col-md-12">
+                                        <button type="button" class="btn btn-danger btn-sm float-right" ng-if="Ctrl.wDelete" ng-click="DeleteData(Template)">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm float-right mr-1" ng-if="Ctrl.wEdit" ng-click="StatusData(Template, 0)">
+                                            <i class="fas fa-times-circle"></i> Deactivate
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm float-right mr-1" ng-if="Ctrl.wEdit" ng-click="StatusData(Template, 1)">
+                                            <i class="fas fa-check-circle"></i> Activate
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-sm float-right mr-1" data-toggle="modal" data-target="#createTemplateModal" ng-if="Ctrl.wAdd" ng-click="AddData()">
+                                            <i class="fas fa-plus-circle"></i> Create
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length form-inline">
+                                            <label>
+                                                Show
+                                                <select name="example1_length" class="form-control form-control-sm" ng-model="pagingInfo.itemsPerPage" ng-change="setItemsPerPage(pagingInfo.itemsPerPage)">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select> entries
+                                            </label>
+                                            <img src="~/Content/dist/img/ajax-loader2.gif" ng-show="loading" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <form ng-submit="search()" role="form">
+                                            <div class="form-inline dataTables_filter">
+                                                <label>
+                                                    Search:
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" ng-model="pagingInfo.search">
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="text-center" width="3%">
+                                                        <input type="checkbox" name="checkAll" id="checkAll" ng-model="selectedAll" ng-click="selectAll()" ng-disabled="!Ctrl.wDelete && !Ctrl.wEdit" />
+                                                    </th>
+                                                    <th class="sorting" width="4%" ng-click="sort('Id')">Nos</th>
+                                                    <th class="sorting" ng-click="sort('Name')">Name</th>
+                                                    <th class="text-center sorting" ng-click="sort('Published')">Status</th>
+                                                    <th class="text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="pagingInfo.totalItems == 0">
+                                                    <td colspan="5"><center>No data to display</center></td>
+                                                </tr>
+                                                <tr ng-if="pagingInfo.totalItems > 0" ng-repeat="to in Template">
+                                                    <td class="text-center">
+                                                        <input type="checkbox" name="check" id="check{{$index + 1}}" ng-model="to.isChecked" ng-change="checkSelected(to.isChecked)" ng-disabled="!Ctrl.wDelete && !Ctrl.wEdit" />
+                                                    </td>
+                                                    <td ng-bind="(pagingInfo.itemsPerPage * (pagingInfo.page - 1)) + $index + 1"></td>
+                                                    <td ng-bind="to.Name"></td>
+                                                    <td class="text-center"><span ng-class="(to.Published === 'True')? 'badge badge-success' : 'badge badge-danger'" ng-bind="(to.Published === 'True')? 'Active' : 'Inactive'"></span></td>
+                                                    <td class="text-center" ng-if="Ctrl.wDelete || Ctrl.wEdit">
+                                                        <button type="button" class="btn btn-secondary btn-circle btn-sm" data-toggle="modal" data-target="#createTemplateModal" ng-if="Ctrl.wEdit" ng-click="EditTemplateData(to)"><i class="fas fa-pencil-alt"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-circle btn-sm" ng-if="Ctrl.wDelete" ng-click="DeleteTemplate(to)"><i class="fas fa-trash-alt"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{pagingInfo.page}} to {{pagingInfo.totalItems/pagingInfo.itemsPerPage | roundup }} of {{pagingInfo.totalItems}} entries</div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                            <ul uib-pagination total-items="(10 * pagingInfo.totalItems)/pagingInfo.itemsPerPage" ng-model="pagingInfo.page" ng-change="selectPage(pagingInfo.page)" max-size="10" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+
+        <div class="modal fade" id="createTemplateModal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Template</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form name="TemplateForm" novalidate role="form" autocomplete="off">
+                        <div class="modal-body">
+                            <div class="form-group has-feedback" show-errors>
+                                <label for="Name">Name <small>*</small></label>
+                                <input type="text" class="form-control form-control-sm" id="Name" name="Name" ng-model="data.Name" ng-required="true" placeholder="Name">
+                                <div style="color:red" class="invalid-feedback" ng-if="TemplateForm.Name.$error.required">You can't leave this empty.</div>
+                            </div>
+                            <div class="form-group has-feedback" show-errors>
+                                <label for="PropertyID">Property <small>*</small></label>
+                                <select class="form-control form-control-sm" id="PropertyID" name="PropertyID" ng-model="data.PropertyID" ng-required="true">
+                                    <option value="">Please select...</option>
+                                    <option ng-repeat="pr in Propertys" ng-selected="pr.Id === data.PropertyID" value="{{pr.Id}}">{{pr.Name}}</option>
+                                </select>
+                                <div style="color:red" class="invalid-feedback" ng-if="TemplateForm.PropertyID.$error.required">You can't leave this empty.</div>
+                            </div>
+                            <div class="form-group has-feedback" show-errors>
+                                <label for="published">Published <small>*</small></label>
+                                <select class="form-control form-control-sm" id="Published" name="Published" ng-model="data.Published" ng-required="true">
+                                    <option value="True">Active</option>
+                                    <option value="False">Inactive</option>
+                                </select>
+                                <div style="color:red" class="invalid-feedback" ng-if="TemplateForm.Published.$error.required">You can't leave this empty.</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="ClearData()">Close</button>
+                            <button type="button" class="btn btn-secondary btn-sm" ng-click="SaveTemplate(data)">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </section>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/Template.js"></script>
+}

@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="cRedeemed">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.PageTitle - @ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+    <meta name="keywords" content="@ViewBag.MetaKeyword">
+    <meta name="author" content="@ViewBag.SiteAuthor">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/main.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        .input-group .invalid-feedback {
+            display: none;
+        }
+
+        .input-group.has-error .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+
+<body ng-cloak>
+    <!-- Full Page Image Header with Vertically Centered Content -->
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center"></div>
+        </div>
+    </header>
+    <section class="py-5">
+        <div class="container h-100">
+            <div class="row mb-2 d-flex justify-content-center" ng-if="Merchants.length && !isDone">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 h->
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="front-footer">
+        <strong>Copyright © 2020-@ViewBag.CurrentYear <a href="https://federalland.ph/" target="_blank">Federal Land, Inc</a>.</strong> All rights reserved.
+    </footer>
+</body>
+
+</html>

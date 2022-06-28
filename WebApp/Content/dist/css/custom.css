@@ -1,0 +1,421 @@
+﻿.content-wrapper  .content {
+    padding: 0 .5rem;
+}
+
+.navbar-indigo {
+    background-color: #2e3192;
+}
+
+.navbar-nav > .user-menu .user-image {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.nav-sidebar .nav-link p {
+    display: inline-flex;
+    white-space: normal;
+}
+
+table.dataTable {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-collapse: collapse;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+    border: 1px solid #ccc;
+}
+
+.dataTables_filter input, .dataTables_length select {
+    height: calc(1.8125rem + 2px);
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+table.dataTable tbody th, table.dataTable tbody td, table.dataTable tfoot th,
+table.customTable tbody th, table.customTable tbody td, table.customTable tfoot th {
+    padding: 5px 8px;
+    font-size: .85rem;
+}
+
+.text-xs .btn {
+    font-size: .70rem !important
+}
+
+.nav-sidebar > .nav-item .nav-icon.fa, .nav-sidebar > .nav-item .nav-icon.fab, .nav-sidebar > .nav-item .nav-icon.far, .nav-sidebar > .nav-item .nav-icon.fas, .nav-sidebar > .nav-item .nav-icon.glyphicon, .nav-sidebar > .nav-item .nav-icon.ion {
+    font-size: .9rem;
+}
+
+/**  Login & Registration    **/ 
+.login-card-body, .register-card-body {
+    border-radius: .55rem;
+    padding: 30px 40px;
+}
+
+.login-logo a, .register-logo a {
+    color: #f1f1f1;
+}
+
+.login-card-body .icheck-primary label {
+    font-weight: normal;
+    font-size: .9rem;
+}
+
+
+.user-panel .info {
+    padding-top: 0;
+}
+
+.dataTables_paginate .page-item.active .page-link {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.dataTables_paginate .page-link {
+    color: #808080;
+}
+
+.dataTables_paginate .pagination-sm .page-link {
+    padding: .1rem .5rem;
+}
+
+.dataTables_wrapper label {
+    font-weight: normal !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+}
+
+.dataTables_wrapper .dataTables_filter input[type=search] {
+    box-sizing: inherit !important;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.progress-bar.animate {
+    width: 100%;
+}
+
+.dataTable .input-group .input-group-text {
+    background-color: #fff;
+    border-left: 0;
+}
+
+.dataTable .form-control-sm {
+    height: calc(1.5125rem + 2px);
+    font-size: .840rem;
+}
+
+.dataTable .input-group-text {
+    padding: .275rem .75rem;
+    font-size: .75rem;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle.btn-sm {
+    width: 22px;
+    height: 22px;
+    padding: 4px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 9px !important;
+    line-height: 1.42857;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+
+.uib-datepicker-popup .fa-svg-icon {
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 1em;
+    min-height: 1em;
+    height: 100%;
+    position: relative;
+    top: -1px;
+}
+
+.uib-datepicker-popup .fa-svg-icon svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.uib-datepicker-popup .fa-svg-icon svg g,
+.uib-datepicker-popup .fa-svg-icon svg path {
+    fill: currentColor;
+}
+
+.dataTable .uib-datepicker-popup {
+    padding-top: 0;
+}
+
+
+.uib-datepicker-popup {
+    padding-top: 0;
+}
+
+.uib-datepicker-popup .btn-secondary {
+    background-color: #f8f9fa;
+    border-color: #ddd;
+    color: #444;
+    font-size: .60rem !important;
+}
+
+.dataTable .uib-datepicker-popup .btn-secondary {
+    background-color: #f8f9fa;
+    border-color: #ddd;
+    color: #444;
+    font-size: .60rem !important;
+    padding: .25rem 0;
+}
+
+.uib-datepicker-popup .btn-info:not(:disabled):not(.disabled).active, .uib-datepicker-popup .btn-info:not(:disabled):not(.disabled):active, .uib-datepicker-popup .show > .btn-info.dropdown-toggle {
+    background-color: #bcd1ff;
+    border-color: #58c5d6;
+}
+
+.uib-datepicker-popup button:disabled,
+.uib-datepicker-popup button[disabled] {
+    border: 1px solid #999999;
+    background-color: #ff9b9b;
+    color: #666666;
+}
+
+
+
+.dataTable .uib-datepicker-popup .uib-day {
+    padding: 1px;
+}
+
+.dataTable .uib-datepicker-popup table th {
+    font-size: 70%;
+}
+
+.dataTable .uib-datepicker-popup table td {
+    font-size: .15rem;
+}
+
+.dataTable .uib-datepicker-popup .uib-button-bar {
+    padding: 4px;
+}
+
+ .uib-datepicker-popup .uib-button-bar .btn {
+    font-size: .60rem !important;
+    padding: .20rem .4rem;
+    margin-bottom: 0;
+}
+
+.multiselect-parent {
+    width: 100%;
+}
+
+.multiselect-parent .dropdown-toggle {
+    width: 100%;
+}
+
+.multiselect-parent button.dropdown-toggle {
+    line-height: 1.3;
+}
+
+.multi-td .multiselect-parent button.dropdown-toggle {
+    line-height: 1;
+}
+
+.multiselect-parent .dropdown-menu {
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.multiselect-parent .dropdown-menu .dropdown-header {
+    padding: .5rem 0;
+}
+
+.modal-content .form-group {
+    margin-bottom: .5rem;
+}
+
+.modal-content .form-group label, .div-content .form-group label {
+    margin-bottom: 0;
+}
+
+.info-box {
+    min-height: 50px;
+}
+
+.hiddenRow {
+    padding: 0 !important;
+}
+
+table.custom-pr-table thead th {
+    font-size: .75rem;
+    vertical-align: text-top;
+    padding: 8px 10px;
+}
+
+table.custom-pr-table tbody td {
+    padding: 2px 4px;
+}
+
+
+table.dataTable .custom-ch-table {
+    border: none;
+    margin: 0;
+}
+
+.ddesc-hor {
+    font-size: .65rem;
+}
+.ddesc-hor dd,
+.ddesc-hor dt {
+    margin-bottom: 0;
+
+}
+
+.col-half-offset {
+    margin-left: 4.166666667%
+}
+
+td.vertical {
+    line-height: 14px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+div.vertical {
+    margin-left: -60%;
+    margin-right: -60%;
+    width: auto;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); /* Safari/Chrome */
+    -moz-transform: rotate(-90deg); /* Firefox */
+    -o-transform: rotate(-90deg); /* Opera */
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    white-space: nowrap;
+}
+
+md-autocomplete {
+    height: calc(1.8125rem + 2px);
+}
+
+md-autocomplete md-autocomplete-wrap {
+    height: calc(1.8125rem + 2px);
+}
+
+md-autocomplete input:not(.md-input) {
+    font-size: .875rem;
+    padding: .25rem .5rem;
+    line-height: 1.5;
+    height: calc(1.8125rem + 2px);
+}
+
+.md-autocomplete-suggestions .md-autocomplete-suggestion {
+    height: 36px;
+    line-height: 36px;
+}
+
+.form-control-ext {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    border-radius: unset;
+    border: none;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #f7f7f7;
+    opacity: 1;
+}
+
+.validation-messages {
+    color: red;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 80%;
+    display: block;
+}
+
+.custom-error {
+    border-color: #dc3545;
+}
+
+.changelog, .changelog td, .changelog th, .changelog .form-control-sm, .changelog .pagination-sm .page-link {
+    font-size: .80rem !important;
+}
+
+.changelog .form-control-sm {
+    height: calc(1.6125rem + 1px);
+    padding: .10rem .5rem;
+}
+
+.btn-circle.btn-xx {
+    width: 18px;
+    height: 18px;
+    padding: 3px 0px;
+    font-size: .5rem !important;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 1.42857;
+}
+
+
+
+.img-upload {
+    border: 1px solid #adb5bd;
+    padding: 3px;
+}
+
+.custom-file-input2 {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: calc(1.8125rem + 2px);
+    margin: 0;
+    opacity: 0;
+}
+
+.custom-file-label2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: calc(1.8125rem + 2px);
+    padding: .25rem .5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: none;
+}

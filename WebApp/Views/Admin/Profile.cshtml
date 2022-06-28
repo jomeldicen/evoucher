@@ -1,0 +1,265 @@
+﻿@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content" ng-controller="User" ng-init="init('@ViewBag.PageUrl')">
+    <div class="container-fluid" ng-init="GetSingleUser()">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="card card-gray card-outline">
+                    <div class="card-body box-profile pb-0">
+                        <div class="text-center">
+                            <img ng-if="User.Photo == null" src="~/Content/ProjectFile/img/avatar5.png" class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                            <img ng-if="User.Photo != null" ng-src="{{User.Photo}}" class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                        </div>
+
+                        <h3 class="profile-username text-center" ng-bind="User.FullName"></h3>
+
+                        <p class="text-muted text-center" ng-bind="User.RoleName"></p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Status</b> <span ng-class="(User.Status === 'True')? 'float-right badge badge-success' : 'float-right badge badge-danger'" ng-bind="(User.Status === 'True')? 'Active' : 'Inactive'"></span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Email</b> <a class="float-right" ng-bind="User.Email"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <div class="card card-gray">
+                    <div class="card-header">
+                        <h3 class="card-title">Summary</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body pb-0">
+                        <strong><i class="fas fa-book mr-1"></i> Last Login</strong>
+
+                        <p class="text-muted" ng-bind="User.LastLogin | date : 'medium'"></p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-pencil-alt mr-1"></i> Total Login</strong>
+
+                        <p class="text-muted" ng-bind="User.TotalLogin"></p>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header card-gray card-outline p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#editProfile" data-toggle="tab">Edit Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#logIn" data-toggle="tab">Log In</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#pageVisit" data-toggle="tab">Page Visit</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#changePassword" data-toggle="tab">Change Password</a></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="editProfile">
+                                <form name="userUpdateForm" novalidate role="form">
+                                    <div class="modal-body div-content">
+                                        <div class="row">
+                                            <div class="col-12 row form-group has-feedback" show-errors>
+                                                <div class="col-3">
+                                                    <div style="height:102px; width:102px; border:1px solid gray">
+                                                        <img ng-if="data.Photo" style="height:100px; width:100px;" src="{{data.Photo}}" alt="...">
+                                                        <img ng-if="!data.Photo" style="height:100px; width:100px;" src="/Content/ProjectFile/img/avatar5.png" alt="...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 pt-3">
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input class="form-control form-control-sm custom-file-input" type="file" fileread="data.Photo" ng-required="true">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-2 pt-3">
+                                                    <button class="form-control btn-danger" ng-click="DeletePicture(data)">Delete Picture</button>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="Role" ng-model="data.RoleId" />
+                                            <input type="hidden" name="Status" ng-model="data.Status" />
+                                            <input type="hidden" name="Email" ng-model="data.Email" />
+
+                                            <div class="col-4 form-group has-feedback" show-errors>
+                                                <label for="FirstName">First Name <small>*</small></label>
+                                                <input type="text" class="form-control form-control-sm" placeholder="First Name" id="FirstName" name="FirstName" ng-model="data.FirstName" ng-required="true">
+                                                <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.FirstName.$error.required">You can't leave this empty.</div>
+                                            </div>
+
+                                            <div class="col-4 form-group has-feedback" show-errors>
+                                                <label for="LastName">Last Name <small>*</small></label>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastName" name="LastName" ng-model="data.LastName" ng-required="true">
+                                                <div style="color:red" class="invalid-feedback" ng-if="userUpdateForm.LastName.$error.required">You can't leave this empty.</div>
+                                            </div>
+
+
+                                            <div class="col-4 form-group has-feedback" show-errors>
+                                                <label for="Position">Position <small>*</small></label>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Position" id="Position" name="Position" ng-model="data.Position" ng-required="true">
+                                                <div style="color:red" class="invalid-feedback" ng-if="userForm.Position.$error.required">You can't leave this empty.</div>
+                                            </div>
+
+                                            <div class="col-4 form-group has-feedback" show-errors>
+                                                <label for="Rank">Rank <small>*</small></label>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Rank" id="Rank" name="Rank" ng-model="data.Rank" ng-required="true">
+                                                <div style="color:red" class="invalid-feedback" ng-if="userForm.Rank.$error.required">You can't leave this empty.</div>
+                                            </div>
+
+                                            <div class="col-4 form-group has-feedback" show-errors>
+                                                <label for="Department">Department <small>*</small></label>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Department" id="Department" name="Department" ng-model="data.Department" ng-required="true">
+                                                <div style="color:red" class="invalid-feedback" ng-if="userForm.Department.$error.required">You can't leave this empty.</div>
+                                            </div>
+
+                                            <div class="col-4 form-group has-feedback" show-errors>
+                                                <label for="Company">Company <small>*</small></label>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Company" id="Company" name="Company" ng-model="data.Company" ng-required="true">
+                                                <div style="color:red" class="invalid-feedback" ng-if="userForm.Company.$error.required">You can't leave this empty.</div>
+                                            </div>
+
+                                            <div class="col-4 form-group has-feedback" show-errors>
+                                                <label for="PhoneNumber">Phone Number <small>*</small></label>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Phone Number" id="PhoneNumber" name="PhoneNumber" ng-model="data.PhoneNumber" ng-required="true">
+                                                <div style="color:red" class="invalid-feedback" ng-if="userForm.PhoneNumber.$error.required">You can't leave this empty.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-default" ng-click="GetSingleUser()"><i class="fas fa-ban"></i>Cancel</button>
+                                        <button type="button" class="btn btn-info" ng-click="UpdateProfile(data)"><i class="fas fa-save"></i> Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="logIn">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6>Last 10 Login History</h6>
+                                        <table datatable="ng" dt-options="dtOptions" id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl#</th>
+                                                    <th>Login</th>
+                                                    <th>Logout</th>
+                                                    <th>IP Address</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="ll in LoginList">
+                                                    <td ng-bind="$index + 1"></td>
+                                                    <td ng-bind="ll.Login | date : 'medium'"></td>
+                                                    <td ng-bind="ll.Logout | date : 'medium'"></td>
+                                                    <td ng-bind="ll.IP"></td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Sl#</th>
+                                                    <th>Login</th>
+                                                    <th>Logout</th>
+                                                    <th>IP Address</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="pageVisit">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6>Last 10 Page Visited</h6>
+                                        <table datatable="ng" dt-options="dtOptions" id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl#</th>
+                                                    <th>Page Name</th>
+                                                    <th>Visit Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="vl in VisitedList">
+                                                    <td ng-bind="$index + 1"></td>
+                                                    <td ng-bind="vl.PageName"></td>
+                                                    <td ng-bind="vl.VisitedDate | date : 'medium'"></td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Sl#</th>
+                                                    <th>Page Name</th>
+                                                    <th>Visit Time</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="changePassword">
+                                <form name="newForm" novalidate role="form">
+                                    <div class="box-body">
+                                        <div class="form-group col-5" show-errors>
+                                            <label for="OldPassword">Old Password <small>*</small></label>
+                                            <input placeholder="Old Password" ng-required="true" class="form-control form-control-sm" ng-model="data.OldPassword" id="oldpassword" name="oldpassword" type="password" data-provide="pwstrength">
+                                            <div style="color:red" class="invalid-feedback" ng-if="newForm.oldpassword.$error.required">You can't leave this empty.</div>
+                                        </div>
+                                        <div class="form-group col-5 has-feedback" show-errors>
+                                            <label for="Password">New Password <small>*</small></label>
+                                            <input placeholder="Password" ng-model="data.NewPassword" id="password" name="password" class="form-control form-control-sm" type="password" data-provide="pwstrength" ng-required="true" ng-minlength="6" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/">
+                                            <div style="color:red" class="invalid-feedback" ng-if="newForm.password.$error.required">You can't leave this empty.</div>
+                                            <div style="color:red" class="invalid-feedback" ng-if="newForm.password.$error.minlength">Use at least 6 characters.</div>
+                                            <div style="color:red" class="invalid-feedback" ng-if="newForm.password.$error.pattern">Minimum one uppercase, lowercase and integer required.</div>
+
+                                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                        </div>
+                                        <div class="form-group col-5 has-feedback" show-errors>
+                                            <label for="ConfirmPassword">Retype password <small>*</small></label>
+                                            <input placeholder="Retype password" ng-model="data.ConfirmPassword" id="confirmpassword" name="confirmpassword" type="password" class="form-control form-control-sm" ng-required="true" ng-pattern="data.NewPassword">
+                                            <div style="color:red" class="invalid-feedback" ng-if="newForm.confirmpassword.$error.required">You can't leave this empty.</div>
+                                            <div style="color:red" class="invalid-feedback" ng-if="newForm.confirmpassword.$error.pattern">These passwords don't match. Try again?</div>
+
+                                            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-info" ng-click="ChangePassword(data)"><i class="fas fa-save"></i> Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/User.js"></script>
+}

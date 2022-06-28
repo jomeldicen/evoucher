@@ -1,0 +1,750 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="Settings" ng-init="init('@ViewBag.PageUrl')">
+    <section class="content" ng-init="GetSettingsData()">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header card-gray card-outline">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form name="settingForm" novalidate role="form">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12 col-md-12">
+                                        <button type="button" class="btn btn-secondary btn-sm float-right mr-1" ng-click="GetSettingsData()">
+                                            <i class="fas fa-ban"></i> Cancel
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-sm float-right mr-1" ng-click="UpdateSettingsData(settings)">
+                                            <i class="fas fa-save"></i> Update
+                                        </button>
+                                    </div>
+                                </div>
+                                <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="custom-site-tab" data-toggle="pill" href="#custom-site" role="tab" aria-controls="custom-site" aria-selected="true">Site</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-system-tab" data-toggle="pill" href="#custom-system" role="tab" aria-controls="custom-system" aria-selected="false">System</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-server-tab" data-toggle="pill" href="#custom-server" role="tab" aria-controls="custom-server" aria-selected="false">Server</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-information-tab" data-toggle="pill" href="#custom-information" role="tab" aria-controls="custom-information" aria-selected="false">Information</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-help-tab" data-toggle="pill" href="#custom-help" role="tab" aria-controls="custom-help" aria-selected="false">Help Support</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="custom-content-below-tabContent">
+                                    <div class="tab-pane fade show active" id="custom-site" role="tabpanel" aria-labelledby="custom-site-tab">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <p class="lead font-weight-bold">Site Settings</p>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2 has-feedback" show-errors>
+                                                        <label for="SiteName" class="col-sm-4 col-form-label">Site Name <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="SiteName" name="SiteName" ng-model="settings.SiteName" placeholder="Site Name" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.SiteName.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2has-feedback" show-errors>
+                                                        <label for="SiteCode" class="col-sm-4 col-form-label">Site Short Abbrv. <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="SiteCode" name="SiteCode" ng-model="settings.SiteCode" placeholder="Site Code" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.SiteCode.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="Type" class="col-sm-4 col-form-label">Site Offline</label>
+                                                        <div class="col-sm-8 pt-2">
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="siteOffline1" name="siteOffline" ng-model="settings.SiteOffline" value="true" ng-checked="(settings.SiteOffline === true)? true : false">
+                                                                <label for="siteOffline1" class="mr-2 font-weight-normal">
+                                                                    Yes
+                                                                </label>
+                                                            </div>
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="siteOffline2" name="siteOffline" ng-model="settings.SiteOffline" value="false" ng-checked="(settings.SiteOffline === false)? true : false">
+                                                                <label for="siteOffline2" class="mr-2 font-weight-normal">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="SiteOfflineMessage" class="col-sm-4 col-form-label">Offline Message</label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control form-control-sm" id="SiteOfflineMessage" name="SiteOfflineMessage" ng-model="settings.SiteOfflineMessage" rows="3" placeholder="Offline Message"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+
+                                                    <p class="lead font-weight-bold">Metadata Settings</p>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="sitemetadesc" class="col-sm-4 col-form-label">Site Meta Description</label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control form-control-sm" id="sitemetadesc" name="sitemetadesc" ng-model="settings.SiteMetaDescription" rows="3" placeholder="Site Meta Description"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="sitemetakeyword" class="col-sm-4 col-form-label">Site Meta Keyword</label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control form-control-sm" id="sitemetakeyword" name="sitemetakeyword" ng-model="settings.SiteMetaKeyword" rows="3" placeholder="Site Meta Keyword"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="Robots" class="col-sm-4 col-form-label">Robots</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm" id="Robots" name="Robots" ng-model="settings.Robots" ng-required="true">
+                                                                <option value="Index, follow">Index, follow</option>
+                                                                <option value="No index, follow">No index, follow</option>
+                                                                <option value="Index, No follow">Index, No follow</option>
+                                                                <option value="No index, no follow">No index, no follow</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="author" class="col-sm-4 col-form-label">Author</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="author" name="author" ng-model="settings.SiteAuthor" placeholder="Author">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="contentrights" class="col-sm-4 col-form-label">Content Rights</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="contentrights" name="contentrights" ng-model="settings.ContentRight" placeholder="Content Rights">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-1">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-sm-12 col-md-5">
+                                                    <p class="lead font-weight-bold">Theme</p>
+                                                    <hr />
+
+                                                    <div class="row mb-2">
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="BodySmallText" name="BodySmallText" ng-model="settings.BodySmallText">
+                                                                <label for="BodySmallText">Body Small Text</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="SidebarNavFlatStyle" name="SidebarNavFlatStyle" ng-model="settings.SidebarNavFlatStyle">
+                                                                <label for="SidebarNavFlatStyle">Sidebar Nav Flat Style</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="NavbarSmallText" name="NavbarSmallText" ng-model="settings.NavbarSmallText">
+                                                                <label for="NavbarSmallText">Navbar Small Text</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="SidebarNavLegacyStyle" name="SidebarNavLegacyStyle" ng-model="settings.SidebarNavLegacyStyle">
+                                                                <label for="SidebarNavLegacyStyle">Sidebar Nav Legacy Style</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="SidebarNavSmallText" name="SidebarNavSmallText" ng-model="settings.SidebarNavSmallText">
+                                                                <label for="SidebarNavSmallText">Sidebar Nav Small Text</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="SidebarNavCompact" name="SidebarNavCompact" ng-model="settings.SidebarNavCompact">
+                                                                <label for="SidebarNavCompact">Sidebar Nav Compact</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="FooterSmallText" name="FooterSmallText" ng-model="settings.FooterSmallText">
+                                                                <label for="FooterSmallText">Footer Small Text</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="SidebarNavChildIndent" name="SidebarNavChildIndent" ng-model="settings.SidebarNavChildIndent">
+                                                                <label for="SidebarNavChildIndent">Sidebar Nav Child Indent</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="BrandLogoSmallText" name="BrandLogoSmallText" ng-model="settings.BrandLogoSmallText">
+                                                                <label for="BrandLogoSmallText">Brand Logo Small Text</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="NavbarColorVariants" class="col-sm-5 col-form-label">Navbar Color Variant</label>
+                                                        <div class="col-sm-7">
+                                                            <select class="form-control form-control-sm" id="NavbarColorVariants" name="NavbarColorVariants" ng-model="settings.NavbarColorVariants" ng-required="true">
+                                                                <option value="navbar-indigo">Indigo</option>
+                                                                <option value="navbar-primary">Blue</option>
+                                                                <option value="navbar-lightblue">Light Blue</option>
+                                                                <option value="navbar-success">Green</option>
+                                                                <option value="navbar-danger">Red</option>
+                                                                <option value="navbar-navy">Navy</option>
+                                                                <option value="navbar-light">Light</option>
+                                                                <option value="navbar-secondary">Gray</option>
+                                                                <option value="navbar-gray-dark">Gray Dark</option>
+                                                                <option value="navbar-dark">Dark</option>
+                                                                <option value="navbar-white">White</option>
+                                                                <option value="navbar-warning">Yellow</option>
+                                                                <option value="navbar-orange">Orange</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="LinkColorVariants" class="col-sm-5 col-form-label">Link Color Variant</label>
+                                                        <div class="col-sm-7">
+                                                            <select class="form-control form-control-sm" id="LinkColorVariants" name="LinkColorVariants" ng-model="settings.LinkColorVariants" ng-required="true">
+                                                                <option value="accent-primary">Accent Blue</option>
+                                                                <option value="accent-warning">Accent Yellow</option>
+                                                                <option value="accent-info">Accent Cyan</option>
+                                                                <option value="accent-danger">Accent Red</option>
+                                                                <option value="accent-success">Accent Green</option>
+                                                                <option value="accent-indigo">Accent Indigo</option>
+                                                                <option value="accent-lightblue">Accent Light Blue</option>
+                                                                <option value="accent-navy">Accent Navy</option>
+                                                                <option value="accent-purple">Accent Purple</option>
+                                                                <option value="accent-fuchsia">Accent Fuchsia</option>
+                                                                <option value="accent-pink">Accent Pink</option>
+                                                                <option value="accent-maroon">Accent Maroon</option>
+                                                                <option value="accent-orange">Accent Orange</option>
+                                                                <option value="accent-lime">Accent Lime</option>
+                                                                <option value="accent-teal">Accent Teal</option>
+                                                                <option value="accent-olive">Accent Olive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="DarkSidebarVariants" class="col-sm-5 col-form-label">Dark Sidebar Variant</label>
+                                                        <div class="col-sm-7">
+                                                            <select class="form-control form-control-sm" id="DarkSidebarVariants" name="DarkSidebarVariants" ng-model="settings.DarkSidebarVariants" ng-required="true">
+                                                                <option value="sidebar-dark-primary">Blue</option>
+                                                                <option value="sidebar-dark-warning">Yellow</option>
+                                                                <option value="sidebar-dark-info">Cyan</option>
+                                                                <option value="sidebar-dark-danger">Red</option>
+                                                                <option value="sidebar-dark-success">Green</option>
+                                                                <option value="sidebar-dark-indigo">Indigo</option>
+                                                                <option value="sidebar-dark-lightblue">Light Blue</option>
+                                                                <option value="sidebar-dark-navy">Navy</option>
+                                                                <option value="sidebar-dark-purple">Purple</option>
+                                                                <option value="sidebar-dark-fuchsia">Fuchsia</option>
+                                                                <option value="sidebar-dark-pink">Pink</option>
+                                                                <option value="sidebar-dark-maroon">Maroon</option>
+                                                                <option value="sidebar-dark-orange">Orange</option>
+                                                                <option value="sidebar-dark-lime">Lime</option>
+                                                                <option value="sidebar-dark-teal">Teal</option>
+                                                                <option value="sidebar-dark-olive">Olive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="LightSidebarVariants" class="col-sm-5 col-form-label">Light Sidebar Variant</label>
+                                                        <div class="col-sm-7">
+                                                            <select class="form-control form-control-sm" id="LightSidebarVariants" name="LightSidebarVariants" ng-model="settings.LightSidebarVariants" ng-required="true">
+                                                                <option value="sidebar-light-primary">Blue</option>
+                                                                <option value="sidebar-light-warning">Yellow</option>
+                                                                <option value="sidebar-light-info">Cyan</option>
+                                                                <option value="sidebar-light-danger">Red</option>
+                                                                <option value="sidebar-light-success">Green</option>
+                                                                <option value="sidebar-light-indigo">Indigo</option>
+                                                                <option value="sidebar-light-lightblue">Light Blue</option>
+                                                                <option value="sidebar-light-navy">Navy</option>
+                                                                <option value="sidebar-light-purple">Purple</option>
+                                                                <option value="sidebar-light-fuchsia">Fuchsia</option>
+                                                                <option value="sidebar-light-pink">Pink</option>
+                                                                <option value="sidebar-light-maroon">Maroon</option>
+                                                                <option value="sidebar-light-orange">Orange</option>
+                                                                <option value="sidebar-light-lime">Lime</option>
+                                                                <option value="sidebar-light-teal">Teal</option>
+                                                                <option value="sidebar-light-olive">Olive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="BrandLogoVariants" class="col-sm-5 col-form-label">Brand Logo Variant</label>
+                                                        <div class="col-sm-7">
+                                                            <select class="form-control form-control-sm" id="BrandLogoVariants" name="BrandLogoVariants" ng-model="settings.BrandLogoVariants" ng-required="true">
+                                                                <option value="navbar-indigo">Indigo</option>
+                                                                <option value="navbar-primary">Blue</option>
+                                                                <option value="navbar-lightblue">Light Blue</option>
+                                                                <option value="navbar-success">Green</option>
+                                                                <option value="navbar-danger">Red</option>
+                                                                <option value="navbar-navy">Navy</option>
+                                                                <option value="navbar-light">Light</option>
+                                                                <option value="navbar-secondary">Gray</option>
+                                                                <option value="navbar-gray-dark">Gray Dark</option>
+                                                                <option value="navbar-dark">Dark</option>
+                                                                <option value="navbar-white">White</option>
+                                                                <option value="navbar-warning">Yellow</option>
+                                                                <option value="navbar-orange">Orange</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-system" role="tabpanel" aria-labelledby="custom-system-tab">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <p class="lead font-weight-bold">System Settings</p>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2 has-feedback" show-errors>
+                                                        <label for="IPAddress" class="col-sm-4 col-form-label">IP Address <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="IPAddress" name="IPAddress" ng-model="settings.IPAddress" placeholder="IP Address" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.IPAddress.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="siteEnv" class="col-sm-4 col-form-label">Environment</label>
+                                                        <div class="col-sm-8 pt-2">
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SystemEnvironment1" name="SystemEnvironment" ng-model="settings.SystemEnvironment" value="DEV" ng-checked="(settings.SystemEnvironment === 'DEV')? true : false">
+                                                                <label for="SystemEnvironment1" class="mr-2 font-weight-normal">
+                                                                    DEV
+                                                                </label>
+                                                            </div>
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SystemEnvironment2" name="SystemEnvironment" ng-model="settings.SystemEnvironment" value="SIT" ng-checked="(settings.SystemEnvironment === 'SIT')? true : false">
+                                                                <label for="SystemEnvironment2" class="mr-2 font-weight-normal">
+                                                                    SIT
+                                                                </label>
+                                                            </div>
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SystemEnvironment3" name="SystemEnvironment" ng-model="settings.SystemEnvironment" value="UAT" ng-checked="(settings.SystemEnvironment === 'UAT')? true : false">
+                                                                <label for="SystemEnvironment3" class="mr-2 font-weight-normal">
+                                                                    UAT
+                                                                </label>
+                                                            </div>
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SystemEnvironment4" name="SystemEnvironment" ng-model="settings.SystemEnvironment" value="PRD" ng-checked="(settings.SystemEnvironment === 'PRD')? true : false">
+                                                                <label for="SystemEnvironment4" class="mr-2 font-weight-normal">
+                                                                    PRD
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2 has-feedback" show-errors>
+                                                        <label for="DefaultIndex" class="col-sm-4 col-form-label">Default Index <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="DefaultIndex" name="DefaultIndex" ng-model="settings.DefaultIndex" placeholder="Default Index" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.IPAddress.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2 has-feedback" show-errors>
+                                                        <label for="SecretKey" class="col-sm-4 col-form-label">Secret Key <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="SecretKey" name="SecretKey" ng-model="settings.SecretKey" placeholder="Secret Key" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.SecretKey.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-1">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-sm-12 col-md-5">
+                                                    <p class="lead font-weight-bold">Miscellaneous</p>
+                                                    <hr />
+
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="userRegister" name="userRegister" ng-model="settings.UserRegister">
+                                                                <label for="userRegister">
+                                                                    Show registration page.
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="emailVerificationDisable" name="emailVerificationDisable" ng-model="settings.EmailVerificationDisable">
+                                                                <label for="emailVerificationDisable">
+                                                                    User can register without email verification.
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="recoverPassword" name="recoverPassword" ng-model="settings.RecoverPassword">
+                                                                <label for="recoverPassword">
+                                                                    User can recover password.
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="changePassword" name="changePassword" ng-model="settings.ChangePassword">
+                                                                <label for="changePassword">
+                                                                    User can change password.
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="icheck-secondary">
+                                                                <input type="checkbox" id="changeProfile" name="changeProfile" ng-model="settings.ChangeProfile">
+                                                                <label for="changeProfile">
+                                                                    User can change profile information.
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row mb-2 has-feedback" show-errors>
+                                                        <label for="VoucherThreshold" class="col-sm-6 col-form-label">Voucher Amount Threshold <small>*</small></label>
+                                                        <div class="col-sm-6">
+                                                            <input type="number" class="form-control form-control-sm" id="VoucherThreshold" name="VoucherThreshold" ng-model="settings.VoucherThreshold" placeholder="0" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.VoucherThreshold.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-server" role="tabpanel" aria-labelledby="custom-server-tab">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <p class="lead font-weight-bold">Server Settings</p>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="ProjectDirectory" class="col-sm-4 col-form-label">Project Directory <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="ProjectDirectory" name="ProjectDirectory" ng-model="settings.ProjectDirectory" placeholder="Project Directory" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.ProjectDirectory.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="UploadPath" class="col-sm-4 col-form-label">Upload Path <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="UploadPath" name="UploadPath" ng-model="settings.UploadPath" placeholder="Upload Path" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.UploadPath.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="ReportPath" class="col-sm-4 col-form-label">Report Path <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="ReportPath" name="UploadPath" ng-model="settings.ReportPath" placeholder="Report Path" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.ReportPath.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <p class="lead font-weight-bold">SMS Settings</p>
+                                                    <hr />
+                                                </div>
+                                                <div class="col-sm-12 col-md-1">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-sm-12 col-md-5">
+
+                                                    <p class="lead font-weight-bold">Mail Settings</p>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="fromemail" class="col-sm-4 col-form-label">From Email <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="email" class="form-control form-control-sm" id="fromemail" name="fromemail" ng-model="settings.FromEmail" placeholder="From Email" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.FromEmail.$error.required">You can't leave this empty.</div>
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.FromEmail.$error">A valid email is required.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="fromname" class="col-sm-4 col-form-label">From Name <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="fromname" name="fromname" ng-model="settings.FromName" placeholder="From Name" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.FromName.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="replyemail" class="col-sm-4 col-form-label">Reply To Email <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="email" class="form-control form-control-sm" id="replyemail" name="replyemail" ng-model="settings.ReplyToEmail" placeholder="Reply To Email" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.ReplyToEmail.$error.required">You can't leave this empty.</div>
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.replyemail.$error">A valid email is required.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="replyname" class="col-sm-4 col-form-label">Reply To Name <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="replyname" name="replyname" ng-model="settings.ReplyToName" placeholder="Reply To Name" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.ReplyToName.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="Mailer" class="col-sm-4 col-form-label">Mailer <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm" id="Mailer" name="Mailer" ng-model="settings.Mailer" ng-required="true">
+                                                                <option value="SMTP">SMTP</option>
+                                                            </select>
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.Mailer.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="smtphost" class="col-sm-4 col-form-label">SMTP Host <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="smtphost" name="smtphost" ng-model="settings.SMTPHost" placeholder="SMTP Host" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.SMTPHost.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="smtpport" class="col-sm-4 col-form-label">SMTP Port <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="smtpport" name="smtpport" ng-model="settings.SMTPPort" placeholder="SMTP Port" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.SMTPPort.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-2">
+                                                        <label for="smtpsecurity" class="col-sm-4 col-form-label">SMTP Security <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm" id="smtpsecurity" name="smtpsecurity" ng-model="settings.SMTPSecurity" ng-required="true">
+                                                                <option value="None">None</option>
+                                                                <option value="SSL/TLS">SSL/TLS</option>
+                                                                <option value="STARTTLS">STARTTLS</option>
+                                                            </select>
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.SMTPSecurity.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="smtpauthentication" class="col-sm-5 col-form-label">SMTP Authentication</label>
+                                                        <div class="col-sm-7 pt-2">
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SMTPAuthentication1" name="SMTPAuthentication" ng-model="settings.SMTPAuthentication" value="true" ng-checked="(settings.SMTPAuthentication)? true : false">
+                                                                <label for="SMTPAuthentication1" class="mr-2 font-weight-normal">
+                                                                    Yes
+                                                                </label>
+                                                            </div>
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SMTPAuthentication2" name="SMTPAuthentication" ng-model="settings.SMTPAuthentication" value="false" ng-checked="(settings.SMTPAuthentication === false)? true : false">
+                                                                <label for="SMTPAuthentication2" class="mr-2 font-weight-normal">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="SMTPEnableSSL1" class="col-sm-5 col-form-label">Enable SSL</label>
+                                                        <div class="col-sm-7 pt-2">
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SMTPEnableSSL1" name="SMTPEnableSSL" ng-model="settings.SMTPEnableSSL" value="true" ng-checked="(settings.SMTPEnableSSL)? true : false">
+                                                                <label for="SMTPAuthentication1" class="mr-2 font-weight-normal">
+                                                                    Yes
+                                                                </label>
+                                                            </div>
+                                                            <div class="icheck-secondary d-inline">
+                                                                <input type="radio" id="SMTPEnableSSL2" name="SMTPEnableSSL" ng-model="settings.SMTPEnableSSL" value="false" ng-checked="(settings.SMTPEnableSSL === false)? true : false">
+                                                                <label for="SMTPAuthentication2" class="mr-2 font-weight-normal">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-pane fade" id="custom-information" role="tabpanel" aria-labelledby="custom-information-tab">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <p class="lead font-weight-bold">Company Details</p>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="Company" class="col-sm-4 col-form-label">Company <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="Company" name="Company" ng-model="settings.Company" placeholder="Company" ng-required="true">
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.Company.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="CorporateAddress" class="col-sm-4 col-form-label">Corporate Address</label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control form-control-sm" id="CorporateAddress" name="CorporateAddress" ng-model="settings.CorporateAddress" rows="3" placeholder="Corporate Address"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="CorporateContactNos" class="col-sm-4 col-form-label">Contact Nos</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="CorporateContactNos" name="CorporateContactNos" ng-model="settings.CorporateContactNos" placeholder="Contact Number">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="CorporateFaxNos" class="col-sm-4 col-form-label">Fax Nos</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="CorporateFaxNos" name="CorporateFaxNos" ng-model="settings.CorporateFaxNos" placeholder="Fax Number">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="CorporateEmail" class="col-sm-4 col-form-label">Corporate Email</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="email" class="form-control form-control-sm" id="CorporateEmail" name="CorporateEmail" ng-model="settings.CorporateEmail" placeholder="Email">
+                                                        </div>
+                                                        <div style="color:red" class="invalid-feedback" ng-if="settingForm.CorporateEmail.$error">A valid email is required.</div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="CorporateWebsite" class="col-sm-4 col-form-label">Corporate Website</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="CorporateWebsite" name="CorporateWebsite" ng-model="settings.CorporateWebsite" placeholder="Website">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-1">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-sm-12 col-md-5">
+
+                                                    <p class="lead font-weight-bold">Social Media</p>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="FacebookPage" class="col-sm-4 col-form-label">Facebook Page</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="FacebookPage" name="FacebookPage" ng-model="settings.FacebookPage" placeholder="Facebook">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="TwitterPage" class="col-sm-4 col-form-label">Twitter Page</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="TwitterPage" name="TwitterPage" ng-model="settings.TwitterPage" placeholder="Twitter">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="InstagramPage" class="col-sm-4 col-form-label">Instagram Page</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="InstagramPage" name="InstagramPage" ng-model="settings.InstagramPage" placeholder="Instagram">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="settingsYoutubePage" class="col-sm-4 col-form-label">Youtube Page</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="settingsYoutubePage" name="settingsYoutubePage" ng-model="settings.YoutubePage" placeholder="Youtube">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="LinkedinPage" class="col-sm-4 col-form-label">Linkedin Page</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="LinkedinPage" name="LinkedinPage" ng-model="settings.LinkedinPage" placeholder="LinkedIn">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="PinterestPage" class="col-sm-4 col-form-label">Pinterest Page</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control form-control-sm" id="PinterestPage" name="PinterestPage" ng-model="settings.PinterestPage" placeholder="Pinterest">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  class="tab-pane fade" id="custom-help" role="tabpanel" aria-labelledby="custom-help-tab">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <p class="lead font-weight-bold">Help Support</p>
+                                                    Note: <i>Email should be separated by semicolon (;)</i>
+                                                    <hr />
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="Company" class="col-sm-4 col-form-label">Marketing Email <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control form-control-sm" id="MarketingEmail" name="MarketingEmail" ng-model="settings.MarketingEmail" placeholder="email@domain.com" ng-required="true" rows="3"></textarea>
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.MarketingEmail.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2" ng-if="false">
+                                                        <label for="ExecutiveEmail" class="col-sm-4 col-form-label">Executive Office Email <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control form-control-sm" id="ExecutiveEmail" name="ExecutiveEmail" ng-model="settings.ExecutiveEmail" placeholder="email@domain.com" ng-required="true" rows="3"></textarea>
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.ExecutiveEmail.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-2">
+                                                        <label for="ITEmail" class="col-sm-4 col-form-label">IT Email <small>*</small></label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control form-control-sm" id="ITEmail" name="ITEmail" ng-model="settings.ITEmail" placeholder="email@domain.com" ng-required="true" rows="3"></textarea>
+                                                            <div style="color:red" class="invalid-feedback" ng-if="settingForm.ITEmail.$error.required">You can't leave this empty.</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ProjectScriptFile/Settings.js"></script>
+}

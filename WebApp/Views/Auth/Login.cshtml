@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="cLogin">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.PageTitle - @ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+    <meta name="keywords" content="@ViewBag.MetaKeyword">
+    <meta name="author" content="@ViewBag.SiteAuthor">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/custom.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <style>
+        .input-group .invalid-feedback {
+            display: none;
+        }
+
+        .input-group.has-error .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>@ViewBag.SiteCode </b>Admin</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg text-sm">Sign in to start your session</p>
+
+                <form name="loginForm" novalidate role="form" class="form-type-material">
+                    <div class="input-group mb-3" show-errors>
+                        <input type="email" class="form-control form-control-sm" id="email" name="email" ng-disabled="ro" ng-model="data.Email" ng-required="true" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        <div style="color:red" class="invalid-feedback" ng-if="loginForm.email.$error.required">You can't leave this empty.</div>
+                    </div>
+                    <div class="input-group mb-3" show-errors>
+                        <input type="password" class="form-control form-control-sm" ng-disabled="ro" ng-model="data.Password" id="password" name="password" ng-required="true" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <div style="color:red" class="invalid-feedback" ng-if="loginForm.password.$error.required">You can't leave this empty.</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <a href="~/Auth/RecoverPassword" class="text-sm">Forgot my Password</a>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-5">
+                            <button type="submit" class="btn btn-info btn-sm btn-block" ng-disabled="ro" ng-click="login(data, 'TOMS')">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <!-- /.social-auth-links -->
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/dist/js/adminlte.min.js"></script>
+
+    <script src="~/Scripts/AngularJS/1.8.0/angular.min.js"></script>
+    <script src="~/Scripts/AngularJS/1.8.0/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/jquery.backstretch.min.js"></script>
+    <script src="~/Scripts/ui-bootstrap-tpls-3.0.2.min.js"></script>
+    <script src="~/Scripts/ProjectScriptFile/sweetalert.min.js"></script>
+    <script src="~/Scripts/ProjectScriptFile/AppLogin.js"></script>
+    <script src="~/Scripts/ProjectScriptFile/Login.js"></script>
+
+</body>
+</html>
+
